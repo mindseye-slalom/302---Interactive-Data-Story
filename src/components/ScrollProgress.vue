@@ -1,5 +1,13 @@
 <template>
-  <div class="scroll-progress" :style="{ width: scrollProgress + '%' }"></div>
+  <div 
+    class="scroll-progress" 
+    :style="{ width: scrollProgress + '%' }"
+    role="progressbar"
+    :aria-valuenow="Math.round(scrollProgress)"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-label="Page scroll progress"
+  ></div>
 </template>
 
 <script setup lang="ts">

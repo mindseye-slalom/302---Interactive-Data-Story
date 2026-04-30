@@ -1,28 +1,28 @@
 <template>
   <div class="quality-story">
     <!-- Act 1: The Problem -->
-    <section class="story-act act-1">
+    <section class="story-act act-1" aria-label="Act 1: The Quality Problem - Introduction to the defect issue">
       <div class="act-content">
         <h1>The $4.2M Quality Problem</h1>
         <div class="hero-metrics">
-          <div class="metric-card">
+          <article class="metric-card" role="region" aria-label="Defects metric">
             <div class="metric-value">
-              <span class="counter" ref="counterRef">0</span>
+              <span class="counter" ref="counterRef" aria-live="polite">0</span>
             </div>
             <div class="metric-label">Defects Detected Last Year</div>
-          </div>
-          <div class="metric-card">
+          </article>
+          <article class="metric-card" role="region" aria-label="Cost impact metric">
             <div class="metric-value">$4.2M</div>
             <div class="metric-label">Total Cost Impact</div>
-          </div>
+          </article>
         </div>
         <p class="story-text">In satellite manufacturing, a single defect can doom a $50M mission. Last year, we detected 2,847 defects.</p>
-        <div class="scroll-indicator">↓ Scroll to explore</div>
+        <div class="scroll-indicator" aria-live="polite" aria-atomic="true">↓ Scroll to explore</div>
       </div>
     </section>
 
     <!-- Act 2: The Surprise -->
-    <section class="story-act act-2">
+    <section class="story-act act-2" aria-label="Act 2: The Surprise - Unexpected defect variance analysis">
       <div class="act-content">
         <h2>It's Not What You Think</h2>
         <p class="story-text">We thought defects were random. The data told a different story. Actual defects exceeded expectations by 154%.</p>
@@ -31,7 +31,7 @@
     </section>
 
     <!-- Act 3: The Pattern -->
-    <section class="story-act act-3">
+    <section class="story-act act-3" aria-label="Act 3: The Pattern - Root cause analysis">
       <div class="act-content">
         <h2>The Root Causes</h2>
         <p class="story-text">Three key factors explain the variance:</p>
@@ -42,7 +42,7 @@
     </section>
 
     <!-- Act 4: The Impact -->
-    <section class="story-act act-4">
+    <section class="story-act act-4" aria-label="Act 4: The Impact - Ripple effects across supply chain">
       <div class="act-content">
         <h2>The Ripple Effect</h2>
         <p class="story-text">The costs compound across the supply chain:</p>
@@ -53,7 +53,7 @@
     </section>
 
     <!-- Act 5: The Solution -->
-    <section class="story-act act-5">
+    <section class="story-act act-5" aria-label="Act 5: The Solution - Path forward and ROI projections">
       <div class="act-content">
         <h2>The Path Forward</h2>
         <p class="story-text">Data shows exactly what works:</p>
@@ -96,16 +96,16 @@ onMounted(() => {
 }
 
 .story-act {
-  min-height: 100vh;
+  min-height: auto;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: var(--spacing-3xl) var(--spacing-xl);
+  padding: var(--spacing-2xl) var(--spacing-xl);
   scroll-margin-top: 60px;
 }
 
 .story-act:nth-child(2n) {
-  background-color: rgba(27, 38, 59, 0.5);
+  background-color: var(--color-deep-blue);
 }
 
 .act-content {
@@ -115,6 +115,8 @@ onMounted(() => {
 
 .act-1 {
   background: linear-gradient(135deg, var(--color-deep-blue) 0%, rgba(27, 38, 59, 0.8) 100%);
+  min-height: 100vh;
+  align-items: center;
 }
 
 .hero-metrics {
@@ -143,7 +145,6 @@ onMounted(() => {
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--color-cyan);
-  font-family: 'Space Mono', monospace;
   margin-bottom: var(--spacing-md);
 }
 

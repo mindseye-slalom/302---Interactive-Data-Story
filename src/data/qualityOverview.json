@@ -1,40 +1,40 @@
 {
-  "expectedVsActual": [
-    {
-      "product": "Antenna Assembly",
-      "expected": 12,
-      "actual": 34,
-      "variance": 22
-    },
-    {
-      "product": "Solar Panel",
-      "expected": 8,
-      "actual": 28,
-      "variance": 20
-    },
-    {
-      "product": "Power Module",
-      "expected": 15,
-      "actual": 31,
-      "variance": 16
-    },
-    {
-      "product": "Thermal Control",
-      "expected": 10,
-      "actual": 25,
-      "variance": 15
-    },
-    {
-      "product": "Communication",
-      "expected": 11,
-      "actual": 24,
-      "variance": 13
+    "expectedVsActual": [
+        {
+            "product": "Antenna Assembly",
+            "expected": 12,
+            "actual": 34,
+            "variance": 22
+        },
+        {
+            "product": "Solar Panel",
+            "expected": 8,
+            "actual": 28,
+            "variance": 20
+        },
+        {
+            "product": "Power Module",
+            "expected": 15,
+            "actual": 31,
+            "variance": 16
+        },
+        {
+            "product": "Thermal Control",
+            "expected": 10,
+            "actual": 25,
+            "variance": 15
+        },
+        {
+            "product": "Communication",
+            "expected": 11,
+            "actual": 24,
+            "variance": 13
+        }
+    ],
+    "summary": {
+        "totalExpected": 56,
+        "totalActual": 142,
+        "totalVariance": 86,
+        "variancePercent": 154
     }
-  ],
-  "summary": {
-    "totalExpected": 56,
-    "totalActual": 142,
-    "totalVariance": 86,
-    "variancePercent": 154
-  }
 }
