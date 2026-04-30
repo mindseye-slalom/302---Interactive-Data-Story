@@ -53,16 +53,16 @@ const chartData = computed(() => ({
     {
       label: 'Expected Defects',
       data: props.data.map(d => d.expected),
-      backgroundColor: 'rgba(0, 217, 255, 0.6)',
-      borderColor: 'rgba(0, 217, 255, 1)',
+      backgroundColor: 'rgba(216, 163, 74, 0.62)',
+      borderColor: 'rgba(216, 163, 74, 1)',
       borderWidth: 2,
       borderRadius: 6
     },
     {
       label: 'Actual Defects',
       data: props.data.map(d => d.actual),
-      backgroundColor: 'rgba(255, 71, 87, 0.6)',
-      borderColor: 'rgba(255, 71, 87, 1)',
+      backgroundColor: 'rgba(255, 107, 87, 0.72)',
+      borderColor: 'rgba(255, 107, 87, 1)',
       borderWidth: 2,
       borderRadius: 6
     }
@@ -97,10 +97,10 @@ const chartOptions: ChartOptions<'bar'> = {
       }
     },
     tooltip: {
-      backgroundColor: 'rgba(13, 27, 42, 0.95)',
-      titleColor: '#00D9FF',
+      backgroundColor: 'rgba(17, 19, 24, 0.98)',
+      titleColor: '#D8A34A',
       bodyColor: 'rgba(255, 255, 255, 0.9)',
-      borderColor: '#00D9FF',
+      borderColor: '#D8A34A',
       borderWidth: 1,
       padding: 12,
       titleFont: {
@@ -168,9 +168,9 @@ const chartOptions: ChartOptions<'bar'> = {
   height: 360px;
   margin: 2rem 0;
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(0, 217, 255, 0.2);
-  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(20, 23, 29, 0.96), rgba(11, 12, 15, 0.98));
+  border: 1px solid rgba(216, 163, 74, 0.2);
+  border-radius: 16px;
   backdrop-filter: blur(8px);
 }
 

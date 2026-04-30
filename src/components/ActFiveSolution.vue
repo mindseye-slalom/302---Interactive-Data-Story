@@ -4,7 +4,6 @@
     <article class="solution-card" aria-label="Best practices from day shift operations">
       <h3>Best Practices from Day Shift</h3>
       <p class="card-subtitle">Day shift proves it's possible—we just need to replicate these conditions on night shift.</p>
-
       <div class="practices-grid">
         <div v-for="practice in bestPractices" :key="practice.id" class="practice-item">
           <h4>{{ practice.title }}</h4>
@@ -362,7 +361,7 @@ const formatValue = (input: CalculatorInput, value: any): string => {
 
 .bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, rgba(6, 214, 160, 0.9), rgba(0, 217, 255, 0.9));
+  background: linear-gradient(90deg, rgba(216, 163, 74, 0.92), rgba(244, 201, 128, 0.92));
 }
 
 .impact {
@@ -378,8 +377,8 @@ const formatValue = (input: CalculatorInput, value: any): string => {
 }
 
 .ar-vision {
-  background: linear-gradient(135deg, rgba(114, 9, 183, 0.15), rgba(0, 217, 255, 0.05));
-  border: 1px solid rgba(114, 9, 183, 0.3);
+  background: linear-gradient(135deg, rgba(216, 163, 74, 0.12), rgba(216, 163, 74, 0.03));
+  border: 1px solid rgba(216, 163, 74, 0.22);
 }
 
 .ar-concept {
@@ -393,7 +392,8 @@ const formatValue = (input: CalculatorInput, value: any): string => {
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 12px;
-  border: 1px solid rgba(0, 217, 255, 0.2);
+  border: 1px solid rgba(216, 163, 74, 0.24);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.28);
   overflow: hidden;
   display: block;
 }
@@ -410,7 +410,7 @@ const formatValue = (input: CalculatorInput, value: any): string => {
   left: 50%;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #00d9ff, transparent);
+  background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
   animation: scanDown 2s infinite;
 }
 
@@ -418,7 +418,7 @@ const formatValue = (input: CalculatorInput, value: any): string => {
   position: absolute;
   width: 60px;
   height: 60px;
-  border: 2px solid rgba(0, 217, 255, 0.6);
+  border: 2px solid rgba(216, 163, 74, 0.6);
   border-radius: 4px;
   top: 20%;
   left: 10%;
@@ -437,8 +437,8 @@ const formatValue = (input: CalculatorInput, value: any): string => {
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 217, 255, 0.7); }
-  50% { box-shadow: 0 0 0 8px rgba(0, 217, 255, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(216, 163, 74, 0.7); }
+  50% { box-shadow: 0 0 0 8px rgba(216, 163, 74, 0); }
 }
 
 .ar-text {
@@ -517,11 +517,12 @@ const formatValue = (input: CalculatorInput, value: any): string => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .result-item.highlight {
-  border-color: rgba(0, 217, 255, 0.2);
-  background: rgba(0, 217, 255, 0.05);
+  border-color: rgba(216, 163, 74, 0.2);
+  background: rgba(216, 163, 74, 0.06);
 }
 
 .result-label {

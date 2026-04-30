@@ -115,19 +115,24 @@ onMounted(() => {
   justify-content: center;
   padding: var(--spacing-2xl) var(--spacing-xl);
   scroll-margin-top: 60px;
+  position: relative;
+  background: linear-gradient(180deg, rgba(20, 23, 29, 0.9), rgba(9, 10, 13, 0.98));
+  border-top: 1px solid rgba(216, 163, 74, 0.08);
 }
 
 .story-act:nth-child(2n) {
-  background-color: var(--color-deep-blue);
+  background: linear-gradient(180deg, rgba(15, 17, 21, 0.96), rgba(8, 9, 12, 1));
 }
 
 .act-content {
   width: 100%;
-  max-width: 900px;
+  max-width: 980px;
 }
 
 .act-1 {
-  background: linear-gradient(135deg, var(--color-deep-blue) 0%, rgba(27, 38, 59, 0.8) 100%);
+  background:
+    radial-gradient(circle at top center, rgba(216, 163, 74, 0.18), transparent 34%),
+    linear-gradient(180deg, #17191e 0%, #0f1115 45%, #090a0d 100%);
   min-height: 100vh;
   align-items: center;
 }
@@ -140,18 +145,18 @@ onMounted(() => {
 }
 
 .metric-card {
-  background: var(--color-card-bg);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(22, 25, 31, 0.96), rgba(14, 16, 20, 0.98));
+  border: 1px solid rgba(216, 163, 74, 0.18);
+  border-radius: 16px;
   padding: var(--spacing-lg);
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
 .metric-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 217, 255, 0.2);
+  box-shadow: 0 18px 34px rgba(216, 163, 74, 0.16);
 }
 
 .metric-value {
@@ -165,7 +170,7 @@ onMounted(() => {
   font-size: 0.875rem;
   color: var(--color-text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.16em;
 }
 
 .story-text {
@@ -181,6 +186,8 @@ onMounted(() => {
 .scroll-indicator {
   display: flex;
   justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
   font-size: 1.5rem;
   color: var(--color-cyan);
   margin-top: var(--spacing-2xl);
@@ -193,9 +200,9 @@ onMounted(() => {
 }
 
 .chart-container {
-  background: var(--color-card-bg);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(20, 23, 29, 0.96), rgba(11, 12, 15, 0.98));
+  border: 1px solid rgba(216, 163, 74, 0.18);
+  border-radius: 16px;
   padding: var(--spacing-3xl);
   margin: var(--spacing-2xl) 0;
   text-align: center;

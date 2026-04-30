@@ -1,27 +1,27 @@
 :root {
-    --font-base: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    --font-base: 'Helvetica Neue', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
 
     /* Primary Colors */
-    --color-deep-blue: #0d1b2a;
-    --color-cyan: #00d9ff;
-    --color-steel-gray: #415a77;
+    --color-deep-blue: #0f1115;
+    --color-cyan: #d8a34a;
+    --color-steel-gray: #5d6470;
 
     /* Shift Status Colors */
-    --color-day-green: #06d6a0;
-    --color-swing-amber: #ffb703;
-    --color-night-red: #e63946;
+    --color-day-green: #cda15a;
+    --color-swing-amber: #f0b65a;
+    --color-night-red: #ff6b57;
 
     /* Accent Colors */
-    --color-bright-blue: #1b98e0;
-    --color-purple: #7209b7;
+    --color-bright-blue: #f4c980;
+    --color-purple: #7d6338;
 
     /* Neutral Colors */
-    --color-bg-dark: #0d1b2a;
-    --color-card-bg: #1b263b;
-    --color-border: #2d3e50;
-    --color-text-primary: #e0e1dd;
-    --color-text-secondary: #778da9;
-    --color-text-muted: #4a5568;
+    --color-bg-dark: #090a0d;
+    --color-card-bg: #14171d;
+    --color-border: #3a3328;
+    --color-text-primary: #f4f1eb;
+    --color-text-secondary: #b6ad9d;
+    --color-text-muted: #736c62;
 
     /* Spacing */
     --spacing-xs: 8px;
@@ -50,7 +50,10 @@ body {
     font-family: var(--font-base);
     color: var(--color-text-primary);
     line-height: 1.6;
-    background-color: var(--color-deep-blue);
+    background-color: var(--color-bg-dark);
+    background-image:
+        radial-gradient(circle at top center, rgba(216, 163, 74, 0.12), transparent 32%),
+        linear-gradient(180deg, #121418 0%, #090a0d 58%, #07080a 100%);
 }
 
 h1,
@@ -103,7 +106,8 @@ a {
 }
 
 a:hover {
-    opacity: 0.9;
+    opacity: 1;
+    color: var(--color-bright-blue);
 }
 
 a:focus-visible {
@@ -116,13 +120,16 @@ button {
     font-family: inherit;
     cursor: pointer;
     transition: all 200ms ease;
-    border-radius: 4px;
+    border-radius: 999px;
     min-height: 44px;
     min-width: 44px;
     padding: 8px 12px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid rgba(216, 163, 74, 0.32);
+    background: rgba(216, 163, 74, 0.06);
+    color: var(--color-text-primary);
 }
 
 button:focus-visible {
@@ -136,7 +143,7 @@ button:focus-visible {
     top: -40px;
     left: 0;
     background: var(--color-cyan);
-    color: var(--color-deep-blue);
+    color: #090a0d;
     padding: 8px 12px;
     text-decoration: none;
     z-index: 100;
@@ -154,11 +161,11 @@ button:focus-visible {
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--color-card-bg);
+    background: #11141a;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--color-cyan);
+    background: rgba(216, 163, 74, 0.72);
     border-radius: 4px;
 }
 
