@@ -25,10 +25,8 @@
     <section class="story-act act-2">
       <div class="act-content">
         <h2>It's Not What You Think</h2>
-        <p class="story-text">We thought defects were random. The data told a different story.</p>
-        <div class="chart-container">
-          <p class="placeholder">Chart: Expected vs Actual Defect Distribution</p>
-        </div>
+        <p class="story-text">We thought defects were random. The data told a different story. Actual defects exceeded expectations by 154%.</p>
+        <BarChart :data="qualityData.expectedVsActual" />
       </div>
     </section>
 
@@ -70,6 +68,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
+import BarChart from '../components/BarChart.vue'
+import qualityData from '../data/qualityOverview.json'
 
 const counterRef = ref<HTMLElement | null>(null)
 
