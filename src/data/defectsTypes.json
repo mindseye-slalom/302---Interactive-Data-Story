@@ -1,0 +1,32 @@
+{
+    "categories": [
+        {
+            "category": "Visual Defects",
+            "dayRate": 0.9,
+            "swingRate": 2.4,
+            "nightRate": 4.5,
+            "multiplier": 5.0
+        },
+        {
+            "category": "Dimensional Defects",
+            "dayRate": 0.5,
+            "swingRate": 1.0,
+            "nightRate": 1.4,
+            "multiplier": 2.8
+        },
+        {
+            "category": "Assembly Defects",
+            "dayRate": 0.6,
+            "swingRate": 1.2,
+            "nightRate": 1.9,
+            "multiplier": 3.1
+        },
+        {
+            "category": "Electrical Defects",
+            "dayRate": 0.4,
+            "swingRate": 0.7,
+            "nightRate": 0.9,
+            "multiplier": 2.2
+        }
+    ]
+}

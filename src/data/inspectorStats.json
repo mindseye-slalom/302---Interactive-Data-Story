@@ -1,0 +1,25 @@
+{
+    "staffing": {
+        "day": {
+            "inspectors": 8,
+            "lines": 4
+        },
+        "night": {
+            "inspectors": 4,
+            "lines": 4
+        }
+    },
+    "experience": {
+        "dayYears": 15,
+        "nightYears": 3
+    },
+    "environment": {
+        "dayLux": 800,
+        "nightLux": 400
+    },
+    "process": {
+        "day": "Peer review required on critical components",
+        "night": "Single-inspector sign-off on critical components"
+    },
+    "insight": "Night shift is not failing. Current staffing, lighting, and process constraints are creating predictable defects."
+}

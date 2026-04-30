@@ -35,9 +35,11 @@
       <div class="act-content">
         <h2>The Root Causes</h2>
         <p class="story-text">Three key factors explain the variance:</p>
-        <div class="chart-container">
-          <p class="placeholder">Charts: Defect Types, Heat Map, Root Causes</p>
-        </div>
+        <ActThreePattern
+          :defect-types="defectTypesData"
+          :heatmap="defectHeatmapData"
+          :inspector-stats="inspectorStatsData"
+        />
       </div>
     </section>
 
@@ -69,7 +71,11 @@
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 import BarChart from '../components/BarChart.vue'
+import ActThreePattern from '../components/ActThreePattern.vue'
 import qualityData from '../data/qualityOverview.json'
+import defectTypesData from '../data/defectsTypes.json'
+import defectHeatmapData from '../data/defectHeatmap.json'
+import inspectorStatsData from '../data/inspectorStats.json'
 
 const counterRef = ref<HTMLElement | null>(null)
 
