@@ -48,9 +48,7 @@
       <div class="act-content">
         <h2>The Ripple Effect</h2>
         <p class="story-text">The costs compound across the supply chain:</p>
-        <div class="chart-container">
-          <p class="placeholder">Charts: Cost Breakdown, Correlations, Customer Impact</p>
-        </div>
+        <ActFourImpact :data="costBreakdownData" :correlations="correlationsData" />
       </div>
     </section>
 
@@ -72,10 +70,13 @@ import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 import BarChart from '../components/BarChart.vue'
 import ActThreePattern from '../components/ActThreePattern.vue'
+import ActFourImpact from '../components/ActFourImpact.vue'
 import qualityData from '../data/qualityOverview.json'
 import defectTypesData from '../data/defectsTypes.json'
 import defectHeatmapData from '../data/defectHeatmap.json'
 import inspectorStatsData from '../data/inspectorStats.json'
+import costBreakdownData from '../data/costBreakdown.json'
+import correlationsData from '../data/correlations.json'
 
 const counterRef = ref<HTMLElement | null>(null)
 

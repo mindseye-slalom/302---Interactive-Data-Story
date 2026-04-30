@@ -1,0 +1,58 @@
+{
+    "speedVsDefects": [
+        {
+            "label": "Day Shift",
+            "speedIndex": 100,
+            "defectRate": 1.2
+        },
+        {
+            "label": "Swing Shift",
+            "speedIndex": 108,
+            "defectRate": 2.1
+        },
+        {
+            "label": "Night Shift",
+            "speedIndex": 115,
+            "defectRate": 3.8
+        }
+    ],
+    "experienceVsDefects": [
+        {
+            "label": "Senior Team",
+            "years": 18,
+            "defectRate": 1.1
+        },
+        {
+            "label": "Mixed Team",
+            "years": 9,
+            "defectRate": 2.0
+        },
+        {
+            "label": "New Team",
+            "years": 3,
+            "defectRate": 3.4
+        }
+    ],
+    "complexityVsDefects": [
+        {
+            "label": "Simple Brackets",
+            "complexity": 2,
+            "defectRate": 1.4
+        },
+        {
+            "label": "Power Modules",
+            "complexity": 6,
+            "defectRate": 2.6
+        },
+        {
+            "label": "Solar Arrays",
+            "complexity": 9,
+            "defectRate": 4.2
+        }
+    ],
+    "insights": {
+        "speed": "Night shift runs 15% faster but sees the highest defect rate, indicating unstable throughput.",
+        "experience": "Each additional year of inspector experience consistently lowers defect risk.",
+        "complexity": "Complex assemblies amplify shift-based quality differences and require stronger controls."
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "totalCost": 4200000,
+    "categories": [
+        {
+            "label": "Rework",
+            "amount": 1800000,
+            "percent": 43
+        },
+        {
+            "label": "Scrap",
+            "amount": 1200000,
+            "percent": 29
+        },
+        {
+            "label": "Warranty",
+            "amount": 900000,
+            "percent": 21
+        },
+        {
+            "label": "Delays",
+            "amount": 300000,
+            "percent": 7
+        }
+    ],
+    "customerImpact": {
+        "launchDelayMonths": 6,
+        "daySatisfaction": 94,
+        "nightSatisfaction": 78,
+        "repeatIncidents": 37
+    }
+}
