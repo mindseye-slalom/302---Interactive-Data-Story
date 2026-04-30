@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision Pro AR Inspector Experience</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .ar-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #0a1929 100%);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            box-shadow: 0 0 60px rgba(0, 217, 255, 0.15), inset 0 0 30px rgba(0, 217, 255, 0.05);
+        }
+
+        /* AR View Background - realistic space with part */
+        .ar-view {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(13, 27, 42, 0.9) 0%, rgba(27, 38, 59, 0.8) 50%, rgba(10, 25, 41, 0.9) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .lab-background {
+            position: absolute;
+            inset: 0;
+            opacity: 0.4;
+        }
+
+        /* Central satellite component */
+        .satellite-part {
+            position: relative;
+            width: 420px;
+            height: 320px;
+            perspective: 1200px;
+            animation: float 4s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotateX(8deg) rotateY(-20deg) rotateZ(-5deg); }
+            50% { transform: translateY(-25px) rotateX(12deg) rotateY(-15deg) rotateZ(-5deg); }
+        }
+
+        .part-body {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 8s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+            100% { transform: rotateX(8deg) rotateY(360deg) rotateZ(-5deg); }
+        }
+
+        .satellite-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 10px 30px rgba(0, 217, 255, 0.15));
+        }
+
+        /* AR Overlays */
+        .ar-overlays {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        /* Defect highlights */
+        .defect-marker {
+            position: absolute;
+            pointer-events: auto;
+        }
+
+        .defect-1 {
+            top: 28%;
+            left: 32%;
+            transform: translate(-50%, -50%);
+        }
+
+        .defect-ring {
+            width: 80px;
+            height: 80px;
+            border: 3px solid #e63946;
+            border-radius: 50%;
+            position: relative;
+            animation: scan 2s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(230, 57, 70, 0.6);
+        }
+
+        @keyframes scan {
+            0%, 100% { box-shadow: 0 0 20px rgba(230, 57, 70, 0.6), inset 0 0 10px rgba(230, 57, 70, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(230, 57, 70, 0.8), inset 0 0 20px rgba(230, 57, 70, 0.4); }
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, rgba(230, 57, 70, 0.8), transparent);
+            animation: scanSlide 2s ease-in-out infinite;
+        }
+
+        @keyframes scanSlide {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .defect-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, #ff6b6b, #e63946);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px rgba(230, 57, 70, 0.8);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(230, 57, 70, 0.8); }
+            50% { box-shadow: 0 0 30px rgba(230, 57, 70, 1); }
+        }
+
+        /* Data panels */
+        .data-panel {
+            position: absolute;
+            background: rgba(13, 27, 42, 0.9);
+            border: 2px solid rgba(0, 217, 255, 0.4);
+            border-radius: 12px;
+            padding: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 217, 255, 0.1);
+            font-size: 13px;
+            color: #00d9ff;
+            font-weight: 600;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .panel-defect-1 {
+            top: 20px;
+            right: 40px;
+            width: 280px;
+        }
+
+        .panel-defect-2 {
+            bottom: 40px;
+            left: 40px;
+            width: 300px;
+        }
+
+        .panel-info {
+            bottom: 40px;
+            right: 40px;
+            width: 260px;
+        }
+
+        .panel-main-info {
+            top: 50%;
+            right: 40px;
+            width: 300px;
+            transform: translateY(-50%);
+        }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .data-row:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            color: rgba(0, 217, 255, 0.7);
+        }
+
+        .data-value {
+            color: #00d9ff;
+            font-weight: 700;
+        }
+
+        .severity-critical {
+            color: #ff6b6b;
+        }
+
+        .severity-high {
+            color: #ffb703;
+        }
+
+        .ai-badge {
+            display: inline-block;
+            background: rgba(0, 217, 255, 0.15);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: #00d9ff;
+            margin-top: 6px;
+        }
+
+        /* Connection lines */
+        .connection-line {
+            position: absolute;
+            stroke: rgba(0, 217, 255, 0.3);
+            stroke-width: 2;
+            pointer-events: none;
+            animation: drawLine 1.5s ease-in-out forwards;
+        }
+
+        @keyframes drawLine {
+            from { stroke-dashoffset: 200; stroke-dasharray: 200; }
+            to { stroke-dashoffset: 0; stroke-dasharray: 200; }
+        }
+
+        /* Top HUD */
+        .hud-top {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .hud-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(0, 217, 255, 0.8);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .hud-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #06d6a0;
+            animation: blink 1s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hud-label {
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 12px;
+        }
+
+        /* Bottom menu */
+        .vision-menu {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .menu-button {
+            background: rgba(0, 217, 255, 0.1);
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            color: #00d9ff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 200ms ease;
+        }
+
+        .menu-button:hover {
+            background: rgba(0, 217, 255, 0.2);
+            border-color: rgba(0, 217, 255, 0.6);
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+        }
+
+        .menu-button.active {
+            background: rgba(0, 217, 255, 0.3);
+            border-color: #00d9ff;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+        }
+
+        /* Hand visualization */
+        .hand-area {
+            position: absolute;
+            bottom: 100px;
+            right: 60px;
+            width: 180px;
+            height: 200px;
+            opacity: 0.3;
+            filter: grayscale(30%);
+        }
+
+        .hand-icon {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 30% 40%, rgba(0, 217, 255, 0.4), transparent);
+            border-radius: 50%;
+            border: 2px dashed rgba(0, 217, 255, 0.2);
+        }
+
+        /* Corner decorations */
+        .corner-marker {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(0, 217, 255, 0.4);
+        }
+
+        .corner-tl { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+        .corner-tr { top: 12px; right: 12px; border-left: none; border-bottom: none; }
+        .corner-bl { bottom: 12px; left: 12px; border-right: none; border-top: none; }
+        .corner-br { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+
+        @media (max-width: 1024px) {
+            .satellite-part {
+                width: 200px;
+                height: 200px;
+            }
+
+            .panel-main {
+                width: 180px;
+                height: 120px;
+            }
+
+            .data-panel {
+                padding: 12px;
+                font-size: 12px;
+            }
+
+            .hud-top {
+                gap: 16px;
+            }
+
+            .defect-ring {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ar-container">
+        <!-- AR View -->
+        <div class="ar-view">
+            <!-- Lab Background Scene -->
+            <svg class="lab-background" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <linearGradient id="floorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#f5f5f5;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#e8e8e8;stop-opacity:0.9" />
+                    </linearGradient>
+                    <linearGradient id="wallGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95" />
+                        <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:0.95" />
+                    </linearGradient>
+                    <radialGradient id="thermalWrap" cx="40%" cy="40%">
+                        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                        <stop offset="60%" style="stop-color:#f5f5f5;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#e0e0e0;stop-opacity:1" />
+                    </radialGradient>
+                    <linearGradient id="goldThruster" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#ccaa00;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#997700;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="solarCell" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#2a5a9d;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#1a4a8d;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#0a3a7d;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+
+                <!-- Bright lab ceiling with skylights -->
+                <rect x="0" y="0" width="1600" height="120" fill="#ffffff"/>
+                <rect x="0" y="120" width="1600" height="40" fill="#f5f5f5"/>
+                
+                <!-- Ceiling lights - bright rectangular panels -->
+                <rect x="100" y="20" width="200" height="60" fill="#fffacd" opacity="0.7"/>
+                <rect x="400" y="20" width="200" height="60" fill="#fffacd" opacity="0.7"/>
+                <rect x="700" y="20" width="200" height="60" fill="#fffacd" opacity="0.7"/>
+                <rect x="1000" y="20" width="200" height="60" fill="#fffacd" opacity="0.7"/>
+                <rect x="1300" y="20" width="200" height="60" fill="#fffacd" opacity="0.7"/>
+
+                <!-- White cleanroom walls -->
+                <rect x="0" y="160" width="1600" height="500" fill="url(#wallGrad)"/>
+
+                <!-- Wall panel divisions -->
+                <line x1="0" y1="160" x2="1600" y2="160" stroke="#ddd" stroke-width="2"/>
+                <line x1="0" y1="300" x2="1600" y2="300" stroke="#e5e5e5" stroke-width="1" opacity="0.5"/>
+                <line x1="0" y1="440" x2="1600" y2="440" stroke="#e5e5e5" stroke-width="1" opacity="0.5"/>
+
+                <!-- Equipment racks on sides -->
+                <rect x="30" y="200" width="80" height="200" fill="#f0f0f0" stroke="#999" stroke-width="2" rx="4"/>
+                <line x1="40" y1="230" x2="100" y2="230" stroke="#999" stroke-width="1"/>
+                <line x1="40" y1="260" x2="100" y2="260" stroke="#999" stroke-width="1"/>
+                <line x1="40" y1="290" x2="100" y2="290" stroke="#999" stroke-width="1"/>
+                <line x1="40" y1="320" x2="100" y2="320" stroke="#999" stroke-width="1"/>
+                <line x1="40" y1="350" x2="100" y2="350" stroke="#999" stroke-width="1"/>
+
+                <rect x="1490" y="200" width="80" height="200" fill="#f0f0f0" stroke="#999" stroke-width="2" rx="4"/>
+                <line x1="1500" y1="230" x2="1560" y2="230" stroke="#999" stroke-width="1"/>
+                <line x1="1500" y1="260" x2="1560" y2="260" stroke="#999" stroke-width="1"/>
+                <line x1="1500" y1="290" x2="1560" y2="290" stroke="#999" stroke-width="1"/>
+                <line x1="1500" y1="320" x2="1560" y2="320" stroke="#999" stroke-width="1"/>
+                <line x1="1500" y1="350" x2="1560" y2="350" stroke="#999" stroke-width="1"/>
+
+                <!-- Main satellite assembly in background - realistic complex structure -->
+                <g id="satellite-assembly" opacity="0.75" filter="drop-shadow(0px 4px 12px rgba(0,0,0,0.1))">
+                    <!-- Central bus structure with thermal wrapping -->
+                    <ellipse cx="800" cy="240" rx="140" ry="120" fill="url(#thermalWrap)" stroke="#ccc" stroke-width="2"/>
+                    <ellipse cx="800" cy="240" rx="130" ry="110" fill="url(#thermalWrap)" stroke="#ddd" stroke-width="1" opacity="0.6"/>
+                    
+                    <!-- Wrinkled thermal blanket details -->
+                    <path d="M 700 160 Q 720 150, 740 160 T 780 170 T 820 160 T 860 170 T 900 160" stroke="#e0e0e0" stroke-width="1" fill="none" opacity="0.8"/>
+                    <path d="M 690 200 Q 730 190, 800 185 Q 870 190, 910 200" stroke="#e0e0e0" stroke-width="1" fill="none" opacity="0.6"/>
+                    <path d="M 700 300 Q 750 310, 800 315 Q 850 310, 900 300" stroke="#d5d5d5" stroke-width="1" fill="none" opacity="0.7"/>
+
+                    <!-- Left solar array panel -->
+                    <g id="left-solar">
+                        <rect x="520" y="180" width="140" height="140" fill="url(#solarCell)" stroke="#999" stroke-width="2" rx="4" opacity="0.9"/>
+                        <!-- Solar cell grid -->
+                        <g stroke="#0a3a7d" stroke-width="0.5" opacity="0.6">
+                            <line x1="535" y1="180" x2="535" y2="320"/>
+                            <line x1="550" y1="180" x2="550" y2="320"/>
+                            <line x1="565" y1="180" x2="565" y2="320"/>
+                            <line x1="580" y1="180" x2="580" y2="320"/>
+                            <line x1="595" y1="180" x2="595" y2="320"/>
+                            <line x1="610" y1="180" x2="610" y2="320"/>
+                            <line x1="625" y1="180" x2="625" y2="320"/>
+                            <line x1="640" y1="180" x2="640" y2="320"/>
+                            <line x1="520" y1="205" x2="660" y2="205"/>
+                            <line x1="520" y1="230" x2="660" y2="230"/>
+                            <line x1="520" y1="255" x2="660" y2="255"/>
+                            <line x1="520" y1="280" x2="660" y2="280"/>
+                            <line x1="520" y1="305" x2="660" y2="305"/>
+                        </g>
+                        <!-- Panel sheen -->
+                        <ellipse cx="560" cy="220" rx="50" ry="35" fill="#ffffff" opacity="0.15"/>
+                    </g>
+
+                    <!-- Right solar array panel -->
+                    <g id="right-solar">
+                        <rect x="940" y="180" width="140" height="140" fill="url(#solarCell)" stroke="#999" stroke-width="2" rx="4" opacity="0.9"/>
+                        <!-- Solar cell grid -->
+                        <g stroke="#0a3a7d" stroke-width="0.5" opacity="0.6">
+                            <line x1="955" y1="180" x2="955" y2="320"/>
+                            <line x1="970" y1="180" x2="970" y2="320"/>
+                            <line x1="985" y1="180" x2="985" y2="320"/>
+                            <line x1="1000" y1="180" x2="1000" y2="320"/>
+                            <line x1="1015" y1="180" x2="1015" y2="320"/>
+                            <line x1="1030" y1="180" x2="1030" y2="320"/>
+                            <line x1="1045" y1="180" x2="1045" y2="320"/>
+                            <line x1="1060" y1="180" x2="1060" y2="320"/>
+                            <line x1="940" y1="205" x2="1080" y2="205"/>
+                            <line x1="940" y1="230" x2="1080" y2="230"/>
+                            <line x1="940" y1="255" x2="1080" y2="255"/>
+                            <line x1="940" y1="280" x2="1080" y2="280"/>
+                            <line x1="940" y1="305" x2="1080" y2="305"/>
+                        </g>
+                        <!-- Panel sheen -->
+                        <ellipse cx="1010" cy="220" rx="50" ry="35" fill="#ffffff" opacity="0.15"/>
+                    </g>
+
+                    <!-- Major thrusters (golden engines) -->
+                    <g id="thrusters">
+                        <!-- Top thruster -->
+                        <ellipse cx="800" cy="100" rx="35" ry="45" fill="url(#goldThruster)" stroke="#996600" stroke-width="2"/>
+                        <ellipse cx="800" cy="95" rx="32" ry="12" fill="#ffeb99" opacity="0.8"/>
+                        <path d="M 785 120 Q 800 140, 815 120" fill="#aa6600" opacity="0.6"/>
+                        
+                        <!-- Left thruster -->
+                        <ellipse cx="650" cy="240" rx="35" ry="28" fill="url(#goldThruster)" stroke="#996600" stroke-width="2"/>
+                        <ellipse cx="650" cy="238" rx="32" ry="12" fill="#ffeb99" opacity="0.8"/>
+                        
+                        <!-- Right thruster -->
+                        <ellipse cx="950" cy="240" rx="35" ry="28" fill="url(#goldThruster)" stroke="#996600" stroke-width="2"/>
+                        <ellipse cx="950" cy="238" rx="32" ry="12" fill="#ffeb99" opacity="0.8"/>
+                        
+                        <!-- Bottom thruster -->
+                        <ellipse cx="800" cy="380" rx="35" ry="45" fill="url(#goldThruster)" stroke="#996600" stroke-width="2"/>
+                        <ellipse cx="800" cy="385" rx="32" ry="12" fill="#ffeb99" opacity="0.8"/>
+                    </g>
+
+                    <!-- Instrumentation and antennas -->
+                    <g id="instruments">
+                        <!-- Antenna 1 -->
+                        <line x1="680" y1="160" x2="650" y2="120" stroke="#666" stroke-width="3"/>
+                        <circle cx="650" cy="120" r="6" fill="#999"/>
+                        <circle cx="650" cy="120" r="4" fill="#ccc"/>
+                        
+                        <!-- Antenna 2 -->
+                        <line x1="920" y1="160" x2="950" y2="120" stroke="#666" stroke-width="3"/>
+                        <circle cx="950" cy="120" r="6" fill="#999"/>
+                        <circle cx="950" cy="120" r="4" fill="#ccc"/>
+                        
+                        <!-- Camera/sensor pods -->
+                        <ellipse cx="760" cy="180" rx="12" ry="18" fill="#333" stroke="#666" stroke-width="1"/>
+                        <ellipse cx="760" cy="175" rx="10" ry="6" fill="#555" opacity="0.8"/>
+                        
+                        <ellipse cx="840" cy="180" rx="12" ry="18" fill="#333" stroke="#666" stroke-width="1"/>
+                        <ellipse cx="840" cy="175" rx="10" ry="6" fill="#555" opacity="0.8"/>
+                    </g>
+
+                    <!-- Radiators (metallic rectangles) -->
+                    <rect x="680" y="260" width="30" height="50" fill="#e0e0e0" stroke="#999" stroke-width="1" rx="2"/>
+                    <rect x="890" y="260" width="30" height="50" fill="#e0e0e0" stroke="#999" stroke-width="1" rx="2"/>
+
+                    <!-- Main structure connectors -->
+                    <line x1="660" y1="240" x2="720" y2="240" stroke="#999" stroke-width="2"/>
+                    <line x1="880" y1="240" x2="940" y2="240" stroke="#999" stroke-width="2"/>
+                    <line x1="800" y1="160" x2="800" y2="120" stroke="#999" stroke-width="2"/>
+                    <line x1="800" y1="320" x2="800" y2="360" stroke="#999" stroke-width="2"/>
+                </g>
+
+                <!-- Floor -->
+                <rect x="0" y="660" width="1600" height="240" fill="url(#floorGrad)"/>
+
+                <!-- Floor grid -->
+                <g stroke="#ddd" stroke-width="1" opacity="0.5">
+                    <line x1="0" y1="700" x2="1600" y2="700"/>
+                    <line x1="0" y1="740" x2="1600" y2="740"/>
+                    <line x1="0" y1="780" x2="1600" y2="780"/>
+                    <line x1="0" y1="820" x2="1600" y2="820"/>
+                    <line x1="200" y1="660" x2="200" y2="900"/>
+                    <line x1="400" y1="660" x2="400" y2="900"/>
+                    <line x1="600" y1="660" x2="600" y2="900"/>
+                    <line x1="800" y1="660" x2="800" y2="900"/>
+                    <line x1="1000" y1="660" x2="1000" y2="900"/>
+                    <line x1="1200" y1="660" x2="1200" y2="900"/>
+                    <line x1="1400" y1="660" x2="1400" y2="900"/>
+                </g>
+
+                <!-- Work platform -->
+                <rect x="650" y="600" width="300" height="60" fill="#ddd" stroke="#999" stroke-width="2" rx="4"/>
+                <rect x="660" y="610" width="280" height="40" fill="#e8e8e8"/>
+                <g stroke="#999" stroke-width="1">
+                    <line x1="680" y1="600" x2="680" y2="660"/>
+                    <line x1="710" y1="600" x2="710" y2="660"/>
+                    <line x1="740" y1="600" x2="740" y2="660"/>
+                    <line x1="770" y1="600" x2="770" y2="660"/>
+                    <line x1="800" y1="600" x2="800" y2="660"/>
+                    <line x1="830" y1="600" x2="830" y2="660"/>
+                    <line x1="860" y1="600" x2="860" y2="660"/>
+                    <line x1="890" y1="600" x2="890" y2="660"/>
+                    <line x1="920" y1="600" x2="920" y2="660"/>
+                </g>
+            </svg>
+            <!-- Central satellite part -->
+            <div class="satellite-part">
+                <div class="part-body">
+                    <svg class="satellite-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#1a4d6d;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#0f3a52;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#082a3d;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="metalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3a5f7d;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#2a4a63;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#1a3a53;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Main solar panel array -->
+                        <rect x="20" y="30" width="360" height="240" fill="url(#panelGrad)" stroke="rgba(0,217,255,0.4)" stroke-width="2" rx="8"/>
+
+                        <!-- Metallic frame -->
+                        <rect x="20" y="30" width="360" height="20" fill="url(#metalGrad)" stroke="rgba(0,217,255,0.3)" stroke-width="1"/>
+                        <rect x="20" y="30" width="20" height="240" fill="url(#metalGrad)" stroke="rgba(0,217,255,0.2)" stroke-width="1"/>
+
+                        <!-- Solar cells grid - realistic cells -->
+                        <g id="solar-cells">
+                            <!-- Row 1 -->
+                            <rect x="45" y="60" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="85" y="60" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="125" y="60" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="165" y="60" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="205" y="60" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="245" y="60" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="285" y="60" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="325" y="60" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+
+                            <!-- Row 2 -->
+                            <rect x="45" y="100" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="85" y="100" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="125" y="100" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="165" y="100" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="205" y="100" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="245" y="100" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="285" y="100" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="325" y="100" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+
+                            <!-- Row 3 -->
+                            <rect x="45" y="140" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="85" y="140" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="125" y="140" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="165" y="140" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="205" y="140" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="245" y="140" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="285" y="140" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="325" y="140" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+
+                            <!-- Row 4 -->
+                            <rect x="45" y="180" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="85" y="180" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="125" y="180" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="165" y="180" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="205" y="180" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="245" y="180" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="285" y="180" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="325" y="180" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                        </g>
+
+                        <!-- Connectors and wiring detail -->
+                        <line x1="40" y1="40" x2="40" y2="265" stroke="rgba(0,217,255,0.2)" stroke-width="1.5" stroke-dasharray="4,4"/>
+                        <line x1="365" y1="40" x2="365" y2="265" stroke="rgba(0,217,255,0.2)" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+                        <!-- Corner connectors -->
+                        <circle cx="35" cy="35" r="3" fill="rgba(0,217,255,0.5)"/>
+                        <circle cx="365" cy="35" r="3" fill="rgba(0,217,255,0.5)"/>
+                        <circle cx="35" cy="265" r="3" fill="rgba(0,217,255,0.5)"/>
+                        <circle cx="365" cy="265" r="3" fill="rgba(0,217,255,0.5)"/>
+
+                        <!-- Reflective highlights for depth -->
+                        <ellipse cx="150" cy="100" rx="80" ry="40" fill="rgba(255,255,255,0.08)" opacity="0.6"/>
+                        <ellipse cx="250" cy="180" rx="60" ry="30" fill="rgba(255,255,255,0.05)" opacity="0.4"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- AR Overlays -->
+            <div class="ar-overlays">
+                <!-- Single defect marker -->
+                <div class="defect-marker defect-1">
+                    <div class="defect-ring">
+                        <div class="scan-line"></div>
+                        <div class="defect-dot"></div>
+                    </div>
+                </div>
+
+                <!-- Single main data panel -->
+                <div class="data-panel panel-main-info">
+                    <div style="margin-bottom: 12px; font-size: 15px; color: #ff6b6b; font-weight: 700;">
+                        🔴 DEFECT DETECTED
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Type:</span>
+                        <span class="data-value">Micro-fracture</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Severity:</span>
+                        <span class="severity-critical">CRITICAL</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Location:</span>
+                        <span class="data-value">Panel Edge</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Size:</span>
+                        <span class="data-value">2.3mm</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">AI Confidence:</span>
+                        <span class="data-value">96%</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Action:</span>
+                        <span class="severity-critical">REJECT / REWORK</span>
+                    </div>
+                </div>
+
+                <!-- Hand visualization -->
+                <div class="hand-area">
+                    <div class="hand-icon"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HUD Elements -->
+        <div class="hud-top">
+            <div class="hud-item">
+                <div class="hud-status"></div>
+                <span class="hud-label">LIVE SCAN ACTIVE</span>
+            </div>
+            <div class="hud-item">
+                <span class="hud-label">PART ID: SX-7284-R</span>
+            </div>
+            <div class="hud-item">
+                <span class="hud-label">AI MODEL v4.2</span>
+            </div>
+        </div>
+
+        <!-- Vision Menu -->
+        <div class="vision-menu">
+            <button class="menu-button active" onclick="switchView('live')">Live Scan</button>
+            <button class="menu-button" onclick="switchView('history')">History</button>
+            <button class="menu-button" onclick="switchView('compare')">Compare</button>
+            <button class="menu-button" onclick="switchView('report')">Report</button>
+        </div>
+
+        <!-- Corner markers (Vision Pro aesthetic) -->
+        <div class="corner-marker corner-tl"></div>
+        <div class="corner-marker corner-tr"></div>
+        <div class="corner-marker corner-bl"></div>
+        <div class="corner-marker corner-br"></div>
+    </div>
+
+    <script>
+        const views = {
+            live: {
+                title: "🔴 DEFECT DETECTED",
+                type: "Micro-fracture",
+                severity: "CRITICAL",
+                location: "Panel Edge",
+                size: "2.3mm",
+                confidence: "96%",
+                action: "REJECT / REWORK"
+            },
+            history: {
+                title: "📊 INSPECTION HISTORY",
+                type: "Previous Defect #847",
+                severity: "CRITICAL",
+                location: "Similar Location",
+                date: "March 15, 2026",
+                resolution: "Replaced Panel",
+                action: "RESOLVED"
+            },
+            compare: {
+                title: "🔄 COMPARISON VIEW",
+                type: "New Defect (Current)",
+                severity: "CRITICAL",
+                location: "Panel Edge",
+                change: "+1 New",
+                trend: "Worsening",
+                action: "ESCALATE"
+            },
+            report: {
+                title: "📋 INSPECTION REPORT",
+                type: "Critical Findings",
+                severity: "REQUIRES ACTION",
+                location: "2 Critical Areas",
+                recommendation: "Reject / Rework",
+                status: "Part Fails QA",
+                action: "ARCHIVE"
+            }
+        };
+
+        function switchView(viewName) {
+            const view = views[viewName];
+            const currentButtons = document.querySelectorAll('.menu-button');
+            
+            // Update active button
+            currentButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(viewName === 'live' ? 'live' : viewName)) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update HUD label
+            const hudLabel = document.querySelector('.hud-label');
+            if (viewName === 'live') {
+                hudLabel.textContent = 'LIVE SCAN ACTIVE';
+            } else {
+                hudLabel.textContent = viewName.toUpperCase() + ' MODE';
+            }
+
+            // Update main panel
+            updateMainPanel(viewName, view);
+        }
+
+        function updateMainPanel(viewName, data) {
+            const panel = document.querySelector('.panel-main-info');
+            if (!panel) return;
+
+            let html = `<div style="margin-bottom: 12px; font-size: 15px; color: ${data.title.includes('HISTORY') ? '#ffb703' : data.title.includes('REPORT') ? '#ff6b6b' : '#ff6b6b'}; font-weight: 700;">
+                ${data.title}
+            </div>`;
+
+            // Define field mapping
+            const fields = [
+                { key: 'type', label: 'Type' },
+                { key: 'severity', label: 'Severity' },
+                { key: 'location', label: 'Location' },
+                { key: 'size', label: 'Size' },
+                { key: 'confidence', label: 'Confidence' },
+                { key: 'date', label: 'Date' },
+                { key: 'resolution', label: 'Resolution' },
+                { key: 'change', label: 'Change' },
+                { key: 'trend', label: 'Trend' },
+                { key: 'recommendation', label: 'Recommendation' },
+                { key: 'status', label: 'Status' },
+                { key: 'action', label: 'Action' }
+            ];
+
+            // Show top 6 fields
+            let count = 0;
+            fields.forEach(field => {
+                if (count < 6 && data[field.key]) {
+                    const value = data[field.key];
+                    const isCritical = field.key === 'severity' && (value === 'CRITICAL' || value === 'REQUIRES ACTION');
+                    const isRed = field.key === 'action' || (field.key === 'severity' && value === 'CRITICAL');
+                    const color = isRed ? 'severity-critical' : 'data-value';
+                    
+                    html += `<div class="data-row">
+                        <span class="data-label">${field.label}:</span>
+                        <span class="${color}">${value}</span>
+                    </div>`;
+                    count++;
+                }
+            });
+
+            panel.innerHTML = html;
+        }
+
+        // Initialize with Live view
+        switchView('live');
+    </script>
+</body>
+</html>
