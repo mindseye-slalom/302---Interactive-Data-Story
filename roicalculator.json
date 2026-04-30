@@ -1,0 +1,45 @@
+{
+    "inputs": [
+        {
+            "id": "staffing",
+            "label": "Additional Inspectors",
+            "min": 0,
+            "max": 4,
+            "step": 1,
+            "default": 2,
+            "costPerUnit": 80000,
+            "defectReductionPerUnit": 21
+        },
+        {
+            "id": "lighting",
+            "label": "Lighting Upgrade",
+            "type": "boolean",
+            "default": true,
+            "cost": 50000,
+            "defectReduction": 28
+        },
+        {
+            "id": "training",
+            "label": "Training Investment",
+            "min": 0,
+            "max": 100000,
+            "step": 10000,
+            "default": 30000,
+            "defectReductionPer10k": 3
+        },
+        {
+            "id": "technology",
+            "label": "AR Quality Assistance",
+            "type": "boolean",
+            "default": false,
+            "costInitial": 200000,
+            "costAnnual": 50000,
+            "defectReduction": 45
+        }
+    ],
+    "constants": {
+        "baselineDefects": 1623,
+        "avgCostPerDefect": 2589,
+        "currentAnnualCost": 4200000
+    }
+}
