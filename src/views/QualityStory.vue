@@ -143,7 +143,7 @@ onMounted(() => {
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--color-cyan);
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Space Mono', monospace;
   margin-bottom: var(--spacing-md);
 }
 
@@ -170,12 +170,12 @@ onMounted(() => {
   font-size: 1.5rem;
   color: var(--color-cyan);
   margin-top: var(--spacing-2xl);
-  animation: bounce 2s infinite;
+  animation: slideDown 1s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+@keyframes slideDown {
+  0% { transform: translateY(-12px); opacity: 0.6; }
+  100% { transform: translateY(4px); opacity: 1; }
 }
 
 .chart-container {

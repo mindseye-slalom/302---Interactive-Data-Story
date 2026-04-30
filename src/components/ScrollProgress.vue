@@ -12,6 +12,11 @@ const handleScroll = () => {
   const docHeight = document.documentElement.scrollHeight - window.innerHeight
   const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
   scrollProgress.value = scrollPercent
+  // Use scaleX for performant width animation
+  const element = document.querySelector('.scroll-progress') as HTMLElement
+  if (element) {
+    element.style.setProperty('--progress-scale', (scrollPercent / 100).toString())
+  }
 }
 
 onMounted(() => {
@@ -31,7 +36,8 @@ onUnmounted(() => {
   height: 4px;
   background: linear-gradient(90deg, var(--color-cyan) 0%, var(--color-bright-blue) 100%);
   width: 0%;
-  transition: width 100ms linear;
+  transition: transform 100ms linear;
+  transform-origin: left;
   z-index: 1000;
   box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
 }
