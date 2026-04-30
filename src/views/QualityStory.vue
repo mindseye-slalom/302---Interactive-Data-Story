@@ -57,9 +57,11 @@
       <div class="act-content">
         <h2>The Path Forward</h2>
         <p class="story-text">Data shows exactly what works:</p>
-        <div class="chart-container">
-          <p class="placeholder">Best Practices, Pilot Results, Future Vision, ROI Calculator</p>
-        </div>
+        <ActFiveSolution
+          :best-practices="bestPracticesData"
+          :pilot-data="pilotResultsData"
+          :roi-config="roiCalculatorConfig"
+        />
       </div>
     </section>
   </div>
@@ -71,12 +73,16 @@ import { gsap } from 'gsap'
 import BarChart from '../components/BarChart.vue'
 import ActThreePattern from '../components/ActThreePattern.vue'
 import ActFourImpact from '../components/ActFourImpact.vue'
+import ActFiveSolution from '../components/ActFiveSolution.vue'
 import qualityData from '../data/qualityOverview.json'
 import defectTypesData from '../data/defectsTypes.json'
 import defectHeatmapData from '../data/defectHeatmap.json'
 import inspectorStatsData from '../data/inspectorStats.json'
 import costBreakdownData from '../data/costBreakdown.json'
 import correlationsData from '../data/correlations.json'
+import bestPracticesData from '../data/bestPractices.json'
+import pilotResultsData from '../data/pilotResults.json'
+import roiCalculatorConfig from '../data/roicalculator.json'
 
 const counterRef = ref<HTMLElement | null>(null)
 
