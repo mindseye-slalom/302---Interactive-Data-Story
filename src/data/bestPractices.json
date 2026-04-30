@@ -1,26 +1,26 @@
 [
-  {
-    "id": "day-staffing",
-    "title": "Proper Staffing Ratios",
-    "description": "Day shift has 8 inspectors for production, with experience averaging 15 years.",
-    "detail": "8 inspectors, 15 yr avg experience"
-  },
-  {
-    "id": "day-lighting",
-    "title": "Optimal Lighting Levels",
-    "description": "Consistent 800 lux lighting throughout the inspection area, matching industry standards.",
-    "detail": "800 lux maintained all shifts"
-  },
-  {
-    "id": "day-pace",
-    "title": "Sustainable Production Pace",
-    "description": "Day shift maintains a 100% pace baseline without rushing, allowing time for thorough inspection.",
-    "detail": "100% baseline pace"
-  },
-  {
-    "id": "day-review",
-    "title": "Peer Review Process",
-    "description": "Critical components go through a second inspection by a senior inspector before shipment.",
-    "detail": "2nd review on 40% of parts"
-  }
+    {
+        "id": "day-staffing",
+        "title": "Proper Staffing Ratios",
+        "description": "Day shift has 8 inspectors for production, with experience averaging 15 years.",
+        "detail": "8 inspectors, 15 yr avg experience"
+    },
+    {
+        "id": "day-lighting",
+        "title": "Optimal Lighting Levels",
+        "description": "Consistent 800 lux lighting throughout the inspection area, matching industry standards.",
+        "detail": "800 lux maintained all shifts"
+    },
+    {
+        "id": "day-pace",
+        "title": "Sustainable Production Pace",
+        "description": "Day shift maintains a 100% pace baseline without rushing, allowing time for thorough inspection.",
+        "detail": "100% baseline pace"
+    },
+    {
+        "id": "day-review",
+        "title": "Peer Review Process",
+        "description": "Critical components go through a second inspection by a senior inspector before shipment.",
+        "detail": "2nd review on 40% of parts"
+    }
 ]

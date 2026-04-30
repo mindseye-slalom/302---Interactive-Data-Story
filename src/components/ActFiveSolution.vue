@@ -389,8 +389,9 @@ const formatValue = (input: CalculatorInput, value: any): string => {
 
 .ar-visual {
   position: relative;
-  height: 400px;
+  height: clamp(520px, 62vw, 640px);
   width: 100%;
+  aspect-ratio: 16 / 9;
   border-radius: 12px;
   border: 1px solid rgba(0, 217, 255, 0.2);
   overflow: hidden;

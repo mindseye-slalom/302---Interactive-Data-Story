@@ -1,25 +1,25 @@
 {
-  "interventions": [
-    {
-      "name": "Added 2 Inspectors",
-      "defectReduction": 42
+    "interventions": [
+        {
+            "name": "Added 2 Inspectors",
+            "defectReduction": 42
+        },
+        {
+            "name": "Improved Lighting to 800 lux",
+            "defectReduction": 28
+        },
+        {
+            "name": "Peer Review on Critical Parts",
+            "defectReduction": 35
+        },
+        {
+            "name": "Slower Production Pace (10%)",
+            "defectReduction": 31
+        }
+    ],
+    "combined": {
+        "defectReductionPercent": 67,
+        "description": "Combined impact: 67% defect reduction on night shift"
     },
-    {
-      "name": "Improved Lighting to 800 lux",
-      "defectReduction": 28
-    },
-    {
-      "name": "Peer Review on Critical Parts",
-      "defectReduction": 35
-    },
-    {
-      "name": "Slower Production Pace (10%)",
-      "defectReduction": 31
-    }
-  ],
-  "combined": {
-    "defectReductionPercent": 67,
-    "description": "Combined impact: 67% defect reduction on night shift"
-  },
-  "summary": "The interventions work—and they pay for themselves in 4 months through reduced rework, scrap, and warranty costs."
+    "summary": "The interventions work—and they pay for themselves in 4 months through reduced rework, scrap, and warranty costs."
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,8 +63,15 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotateX(8deg) rotateY(-20deg) rotateZ(-5deg); }
-            50% { transform: translateY(-25px) rotateX(12deg) rotateY(-15deg) rotateZ(-5deg); }
+
+            0%,
+            100% {
+                transform: translateY(0px) rotateX(8deg) rotateY(-20deg) rotateZ(-5deg);
+            }
+
+            50% {
+                transform: translateY(-25px) rotateX(12deg) rotateY(-15deg) rotateZ(-5deg);
+            }
         }
 
         .part-body {
@@ -75,8 +83,13 @@
         }
 
         @keyframes rotate {
-            0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
-            100% { transform: rotateX(8deg) rotateY(360deg) rotateZ(-5deg); }
+            0% {
+                transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            }
+
+            100% {
+                transform: rotateX(8deg) rotateY(360deg) rotateZ(-5deg);
+            }
         }
 
         .satellite-svg {
@@ -115,8 +128,15 @@
         }
 
         @keyframes scan {
-            0%, 100% { box-shadow: 0 0 20px rgba(230, 57, 70, 0.6), inset 0 0 10px rgba(230, 57, 70, 0.2); }
-            50% { box-shadow: 0 0 40px rgba(230, 57, 70, 0.8), inset 0 0 20px rgba(230, 57, 70, 0.4); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(230, 57, 70, 0.6), inset 0 0 10px rgba(230, 57, 70, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(230, 57, 70, 0.8), inset 0 0 20px rgba(230, 57, 70, 0.4);
+            }
         }
 
         .scan-line {
@@ -130,8 +150,13 @@
         }
 
         @keyframes scanSlide {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(100%);
+            }
         }
 
         .defect-dot {
@@ -148,8 +173,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 15px rgba(230, 57, 70, 0.8); }
-            50% { box-shadow: 0 0 30px rgba(230, 57, 70, 1); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 15px rgba(230, 57, 70, 0.8);
+            }
+
+            50% {
+                box-shadow: 0 0 30px rgba(230, 57, 70, 1);
+            }
         }
 
         /* Data panels */
@@ -168,8 +200,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .panel-defect-1 {
@@ -247,8 +286,15 @@
         }
 
         @keyframes drawLine {
-            from { stroke-dashoffset: 200; stroke-dasharray: 200; }
-            to { stroke-dashoffset: 0; stroke-dasharray: 200; }
+            from {
+                stroke-dashoffset: 200;
+                stroke-dasharray: 200;
+            }
+
+            to {
+                stroke-dashoffset: 0;
+                stroke-dasharray: 200;
+            }
         }
 
         /* Top HUD */
@@ -281,8 +327,15 @@
         }
 
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
         }
 
         .hud-label {
@@ -355,10 +408,33 @@
             border: 2px solid rgba(232, 160, 0, 0.3);
         }
 
-        .corner-tl { top: 12px; left: 12px; border-right: none; border-bottom: none; }
-        .corner-tr { top: 12px; right: 12px; border-left: none; border-bottom: none; }
-        .corner-bl { bottom: 12px; left: 12px; border-right: none; border-top: none; }
-        .corner-br { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+        .corner-tl {
+            top: 12px;
+            left: 12px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-tr {
+            top: 12px;
+            right: 12px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-bl {
+            bottom: 12px;
+            left: 12px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-br {
+            bottom: 12px;
+            right: 12px;
+            border-left: none;
+            border-top: none;
+        }
 
         @media (max-width: 1024px) {
             .satellite-part {
@@ -387,12 +463,14 @@
         }
     </style>
 </head>
+
 <body>
     <div class="ar-container">
         <!-- AR View -->
         <div class="ar-view">
             <!-- Lab Background Scene -->
-            <svg class="lab-background" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <svg class="lab-background" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="xMidYMid slice">
                 <defs>
                     <linearGradient id="floorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                         <stop offset="0%" style="stop-color:#f5f5f5;stop-opacity:0.9" />
@@ -420,178 +498,189 @@
                 </defs>
 
                 <!-- Bright lab ceiling with skylights -->
-                <rect x="0" y="0" width="1600" height="120" fill="#ffffff"/>
-                <rect x="0" y="120" width="1600" height="40" fill="#f5f5f5"/>
-                
+                <rect x="0" y="0" width="1600" height="120" fill="#ffffff" />
+                <rect x="0" y="120" width="1600" height="40" fill="#f5f5f5" />
+
                 <!-- Ceiling lights - bright rectangular panels -->
-                <rect x="100" y="20" width="200" height="60" fill="#fffacd" opacity="0.7"/>
-                <rect x="400" y="20" width="200" height="60" fill="#fffacd" opacity="0.7"/>
-                <rect x="700" y="20" width="200" height="60" fill="#fffacd" opacity="0.7"/>
-                <rect x="1000" y="20" width="200" height="60" fill="#fffacd" opacity="0.7"/>
-                <rect x="1300" y="20" width="200" height="60" fill="#fffacd" opacity="0.7"/>
+                <rect x="100" y="20" width="200" height="60" fill="#fffacd" opacity="0.7" />
+                <rect x="400" y="20" width="200" height="60" fill="#fffacd" opacity="0.7" />
+                <rect x="700" y="20" width="200" height="60" fill="#fffacd" opacity="0.7" />
+                <rect x="1000" y="20" width="200" height="60" fill="#fffacd" opacity="0.7" />
+                <rect x="1300" y="20" width="200" height="60" fill="#fffacd" opacity="0.7" />
 
                 <!-- White cleanroom walls -->
-                <rect x="0" y="160" width="1600" height="500" fill="url(#wallGrad)"/>
+                <rect x="0" y="160" width="1600" height="500" fill="url(#wallGrad)" />
 
                 <!-- Wall panel divisions -->
-                <line x1="0" y1="160" x2="1600" y2="160" stroke="#ddd" stroke-width="2"/>
-                <line x1="0" y1="300" x2="1600" y2="300" stroke="#e5e5e5" stroke-width="1" opacity="0.5"/>
-                <line x1="0" y1="440" x2="1600" y2="440" stroke="#e5e5e5" stroke-width="1" opacity="0.5"/>
+                <line x1="0" y1="160" x2="1600" y2="160" stroke="#ddd" stroke-width="2" />
+                <line x1="0" y1="300" x2="1600" y2="300" stroke="#e5e5e5" stroke-width="1" opacity="0.5" />
+                <line x1="0" y1="440" x2="1600" y2="440" stroke="#e5e5e5" stroke-width="1" opacity="0.5" />
 
                 <!-- Equipment racks on sides -->
-                <rect x="30" y="200" width="80" height="200" fill="#f0f0f0" stroke="#999" stroke-width="2" rx="4"/>
-                <line x1="40" y1="230" x2="100" y2="230" stroke="#999" stroke-width="1"/>
-                <line x1="40" y1="260" x2="100" y2="260" stroke="#999" stroke-width="1"/>
-                <line x1="40" y1="290" x2="100" y2="290" stroke="#999" stroke-width="1"/>
-                <line x1="40" y1="320" x2="100" y2="320" stroke="#999" stroke-width="1"/>
-                <line x1="40" y1="350" x2="100" y2="350" stroke="#999" stroke-width="1"/>
+                <rect x="30" y="200" width="80" height="200" fill="#f0f0f0" stroke="#999" stroke-width="2" rx="4" />
+                <line x1="40" y1="230" x2="100" y2="230" stroke="#999" stroke-width="1" />
+                <line x1="40" y1="260" x2="100" y2="260" stroke="#999" stroke-width="1" />
+                <line x1="40" y1="290" x2="100" y2="290" stroke="#999" stroke-width="1" />
+                <line x1="40" y1="320" x2="100" y2="320" stroke="#999" stroke-width="1" />
+                <line x1="40" y1="350" x2="100" y2="350" stroke="#999" stroke-width="1" />
 
-                <rect x="1490" y="200" width="80" height="200" fill="#f0f0f0" stroke="#999" stroke-width="2" rx="4"/>
-                <line x1="1500" y1="230" x2="1560" y2="230" stroke="#999" stroke-width="1"/>
-                <line x1="1500" y1="260" x2="1560" y2="260" stroke="#999" stroke-width="1"/>
-                <line x1="1500" y1="290" x2="1560" y2="290" stroke="#999" stroke-width="1"/>
-                <line x1="1500" y1="320" x2="1560" y2="320" stroke="#999" stroke-width="1"/>
-                <line x1="1500" y1="350" x2="1560" y2="350" stroke="#999" stroke-width="1"/>
+                <rect x="1490" y="200" width="80" height="200" fill="#f0f0f0" stroke="#999" stroke-width="2" rx="4" />
+                <line x1="1500" y1="230" x2="1560" y2="230" stroke="#999" stroke-width="1" />
+                <line x1="1500" y1="260" x2="1560" y2="260" stroke="#999" stroke-width="1" />
+                <line x1="1500" y1="290" x2="1560" y2="290" stroke="#999" stroke-width="1" />
+                <line x1="1500" y1="320" x2="1560" y2="320" stroke="#999" stroke-width="1" />
+                <line x1="1500" y1="350" x2="1560" y2="350" stroke="#999" stroke-width="1" />
 
                 <!-- Main satellite assembly in background - realistic complex structure -->
                 <g id="satellite-assembly" opacity="0.75" filter="drop-shadow(0px 4px 12px rgba(0,0,0,0.1))">
                     <!-- Central bus structure with thermal wrapping -->
-                    <ellipse cx="800" cy="240" rx="140" ry="120" fill="url(#thermalWrap)" stroke="#ccc" stroke-width="2"/>
-                    <ellipse cx="800" cy="240" rx="130" ry="110" fill="url(#thermalWrap)" stroke="#ddd" stroke-width="1" opacity="0.6"/>
-                    
+                    <ellipse cx="800" cy="240" rx="140" ry="120" fill="url(#thermalWrap)" stroke="#ccc"
+                        stroke-width="2" />
+                    <ellipse cx="800" cy="240" rx="130" ry="110" fill="url(#thermalWrap)" stroke="#ddd" stroke-width="1"
+                        opacity="0.6" />
+
                     <!-- Wrinkled thermal blanket details -->
-                    <path d="M 700 160 Q 720 150, 740 160 T 780 170 T 820 160 T 860 170 T 900 160" stroke="#e0e0e0" stroke-width="1" fill="none" opacity="0.8"/>
-                    <path d="M 690 200 Q 730 190, 800 185 Q 870 190, 910 200" stroke="#e0e0e0" stroke-width="1" fill="none" opacity="0.6"/>
-                    <path d="M 700 300 Q 750 310, 800 315 Q 850 310, 900 300" stroke="#d5d5d5" stroke-width="1" fill="none" opacity="0.7"/>
+                    <path d="M 700 160 Q 720 150, 740 160 T 780 170 T 820 160 T 860 170 T 900 160" stroke="#e0e0e0"
+                        stroke-width="1" fill="none" opacity="0.8" />
+                    <path d="M 690 200 Q 730 190, 800 185 Q 870 190, 910 200" stroke="#e0e0e0" stroke-width="1"
+                        fill="none" opacity="0.6" />
+                    <path d="M 700 300 Q 750 310, 800 315 Q 850 310, 900 300" stroke="#d5d5d5" stroke-width="1"
+                        fill="none" opacity="0.7" />
 
                     <!-- Left solar array panel -->
                     <g id="left-solar">
-                        <rect x="520" y="180" width="140" height="140" fill="url(#solarCell)" stroke="#999" stroke-width="2" rx="4" opacity="0.9"/>
+                        <rect x="520" y="180" width="140" height="140" fill="url(#solarCell)" stroke="#999"
+                            stroke-width="2" rx="4" opacity="0.9" />
                         <!-- Solar cell grid -->
                         <g stroke="#0a3a7d" stroke-width="0.5" opacity="0.6">
-                            <line x1="535" y1="180" x2="535" y2="320"/>
-                            <line x1="550" y1="180" x2="550" y2="320"/>
-                            <line x1="565" y1="180" x2="565" y2="320"/>
-                            <line x1="580" y1="180" x2="580" y2="320"/>
-                            <line x1="595" y1="180" x2="595" y2="320"/>
-                            <line x1="610" y1="180" x2="610" y2="320"/>
-                            <line x1="625" y1="180" x2="625" y2="320"/>
-                            <line x1="640" y1="180" x2="640" y2="320"/>
-                            <line x1="520" y1="205" x2="660" y2="205"/>
-                            <line x1="520" y1="230" x2="660" y2="230"/>
-                            <line x1="520" y1="255" x2="660" y2="255"/>
-                            <line x1="520" y1="280" x2="660" y2="280"/>
-                            <line x1="520" y1="305" x2="660" y2="305"/>
+                            <line x1="535" y1="180" x2="535" y2="320" />
+                            <line x1="550" y1="180" x2="550" y2="320" />
+                            <line x1="565" y1="180" x2="565" y2="320" />
+                            <line x1="580" y1="180" x2="580" y2="320" />
+                            <line x1="595" y1="180" x2="595" y2="320" />
+                            <line x1="610" y1="180" x2="610" y2="320" />
+                            <line x1="625" y1="180" x2="625" y2="320" />
+                            <line x1="640" y1="180" x2="640" y2="320" />
+                            <line x1="520" y1="205" x2="660" y2="205" />
+                            <line x1="520" y1="230" x2="660" y2="230" />
+                            <line x1="520" y1="255" x2="660" y2="255" />
+                            <line x1="520" y1="280" x2="660" y2="280" />
+                            <line x1="520" y1="305" x2="660" y2="305" />
                         </g>
                         <!-- Panel sheen -->
-                        <ellipse cx="560" cy="220" rx="50" ry="35" fill="#ffffff" opacity="0.15"/>
+                        <ellipse cx="560" cy="220" rx="50" ry="35" fill="#ffffff" opacity="0.15" />
                     </g>
 
                     <!-- Right solar array panel -->
                     <g id="right-solar">
-                        <rect x="940" y="180" width="140" height="140" fill="url(#solarCell)" stroke="#999" stroke-width="2" rx="4" opacity="0.9"/>
+                        <rect x="940" y="180" width="140" height="140" fill="url(#solarCell)" stroke="#999"
+                            stroke-width="2" rx="4" opacity="0.9" />
                         <!-- Solar cell grid -->
                         <g stroke="#0a3a7d" stroke-width="0.5" opacity="0.6">
-                            <line x1="955" y1="180" x2="955" y2="320"/>
-                            <line x1="970" y1="180" x2="970" y2="320"/>
-                            <line x1="985" y1="180" x2="985" y2="320"/>
-                            <line x1="1000" y1="180" x2="1000" y2="320"/>
-                            <line x1="1015" y1="180" x2="1015" y2="320"/>
-                            <line x1="1030" y1="180" x2="1030" y2="320"/>
-                            <line x1="1045" y1="180" x2="1045" y2="320"/>
-                            <line x1="1060" y1="180" x2="1060" y2="320"/>
-                            <line x1="940" y1="205" x2="1080" y2="205"/>
-                            <line x1="940" y1="230" x2="1080" y2="230"/>
-                            <line x1="940" y1="255" x2="1080" y2="255"/>
-                            <line x1="940" y1="280" x2="1080" y2="280"/>
-                            <line x1="940" y1="305" x2="1080" y2="305"/>
+                            <line x1="955" y1="180" x2="955" y2="320" />
+                            <line x1="970" y1="180" x2="970" y2="320" />
+                            <line x1="985" y1="180" x2="985" y2="320" />
+                            <line x1="1000" y1="180" x2="1000" y2="320" />
+                            <line x1="1015" y1="180" x2="1015" y2="320" />
+                            <line x1="1030" y1="180" x2="1030" y2="320" />
+                            <line x1="1045" y1="180" x2="1045" y2="320" />
+                            <line x1="1060" y1="180" x2="1060" y2="320" />
+                            <line x1="940" y1="205" x2="1080" y2="205" />
+                            <line x1="940" y1="230" x2="1080" y2="230" />
+                            <line x1="940" y1="255" x2="1080" y2="255" />
+                            <line x1="940" y1="280" x2="1080" y2="280" />
+                            <line x1="940" y1="305" x2="1080" y2="305" />
                         </g>
                         <!-- Panel sheen -->
-                        <ellipse cx="1010" cy="220" rx="50" ry="35" fill="#ffffff" opacity="0.15"/>
+                        <ellipse cx="1010" cy="220" rx="50" ry="35" fill="#ffffff" opacity="0.15" />
                     </g>
 
                     <!-- Major thrusters (golden engines) -->
                     <g id="thrusters">
                         <!-- Top thruster -->
-                        <ellipse cx="800" cy="100" rx="35" ry="45" fill="url(#goldThruster)" stroke="#996600" stroke-width="2"/>
-                        <ellipse cx="800" cy="95" rx="32" ry="12" fill="#ffeb99" opacity="0.8"/>
-                        <path d="M 785 120 Q 800 140, 815 120" fill="#aa6600" opacity="0.6"/>
-                        
+                        <ellipse cx="800" cy="100" rx="35" ry="45" fill="url(#goldThruster)" stroke="#996600"
+                            stroke-width="2" />
+                        <ellipse cx="800" cy="95" rx="32" ry="12" fill="#ffeb99" opacity="0.8" />
+                        <path d="M 785 120 Q 800 140, 815 120" fill="#aa6600" opacity="0.6" />
+
                         <!-- Left thruster -->
-                        <ellipse cx="650" cy="240" rx="35" ry="28" fill="url(#goldThruster)" stroke="#996600" stroke-width="2"/>
-                        <ellipse cx="650" cy="238" rx="32" ry="12" fill="#ffeb99" opacity="0.8"/>
-                        
+                        <ellipse cx="650" cy="240" rx="35" ry="28" fill="url(#goldThruster)" stroke="#996600"
+                            stroke-width="2" />
+                        <ellipse cx="650" cy="238" rx="32" ry="12" fill="#ffeb99" opacity="0.8" />
+
                         <!-- Right thruster -->
-                        <ellipse cx="950" cy="240" rx="35" ry="28" fill="url(#goldThruster)" stroke="#996600" stroke-width="2"/>
-                        <ellipse cx="950" cy="238" rx="32" ry="12" fill="#ffeb99" opacity="0.8"/>
-                        
+                        <ellipse cx="950" cy="240" rx="35" ry="28" fill="url(#goldThruster)" stroke="#996600"
+                            stroke-width="2" />
+                        <ellipse cx="950" cy="238" rx="32" ry="12" fill="#ffeb99" opacity="0.8" />
+
                         <!-- Bottom thruster -->
-                        <ellipse cx="800" cy="380" rx="35" ry="45" fill="url(#goldThruster)" stroke="#996600" stroke-width="2"/>
-                        <ellipse cx="800" cy="385" rx="32" ry="12" fill="#ffeb99" opacity="0.8"/>
+                        <ellipse cx="800" cy="380" rx="35" ry="45" fill="url(#goldThruster)" stroke="#996600"
+                            stroke-width="2" />
+                        <ellipse cx="800" cy="385" rx="32" ry="12" fill="#ffeb99" opacity="0.8" />
                     </g>
 
                     <!-- Instrumentation and antennas -->
                     <g id="instruments">
                         <!-- Antenna 1 -->
-                        <line x1="680" y1="160" x2="650" y2="120" stroke="#666" stroke-width="3"/>
-                        <circle cx="650" cy="120" r="6" fill="#999"/>
-                        <circle cx="650" cy="120" r="4" fill="#ccc"/>
-                        
+                        <line x1="680" y1="160" x2="650" y2="120" stroke="#666" stroke-width="3" />
+                        <circle cx="650" cy="120" r="6" fill="#999" />
+                        <circle cx="650" cy="120" r="4" fill="#ccc" />
+
                         <!-- Antenna 2 -->
-                        <line x1="920" y1="160" x2="950" y2="120" stroke="#666" stroke-width="3"/>
-                        <circle cx="950" cy="120" r="6" fill="#999"/>
-                        <circle cx="950" cy="120" r="4" fill="#ccc"/>
-                        
+                        <line x1="920" y1="160" x2="950" y2="120" stroke="#666" stroke-width="3" />
+                        <circle cx="950" cy="120" r="6" fill="#999" />
+                        <circle cx="950" cy="120" r="4" fill="#ccc" />
+
                         <!-- Camera/sensor pods -->
-                        <ellipse cx="760" cy="180" rx="12" ry="18" fill="#333" stroke="#666" stroke-width="1"/>
-                        <ellipse cx="760" cy="175" rx="10" ry="6" fill="#555" opacity="0.8"/>
-                        
-                        <ellipse cx="840" cy="180" rx="12" ry="18" fill="#333" stroke="#666" stroke-width="1"/>
-                        <ellipse cx="840" cy="175" rx="10" ry="6" fill="#555" opacity="0.8"/>
+                        <ellipse cx="760" cy="180" rx="12" ry="18" fill="#333" stroke="#666" stroke-width="1" />
+                        <ellipse cx="760" cy="175" rx="10" ry="6" fill="#555" opacity="0.8" />
+
+                        <ellipse cx="840" cy="180" rx="12" ry="18" fill="#333" stroke="#666" stroke-width="1" />
+                        <ellipse cx="840" cy="175" rx="10" ry="6" fill="#555" opacity="0.8" />
                     </g>
 
                     <!-- Radiators (metallic rectangles) -->
-                    <rect x="680" y="260" width="30" height="50" fill="#e0e0e0" stroke="#999" stroke-width="1" rx="2"/>
-                    <rect x="890" y="260" width="30" height="50" fill="#e0e0e0" stroke="#999" stroke-width="1" rx="2"/>
+                    <rect x="680" y="260" width="30" height="50" fill="#e0e0e0" stroke="#999" stroke-width="1" rx="2" />
+                    <rect x="890" y="260" width="30" height="50" fill="#e0e0e0" stroke="#999" stroke-width="1" rx="2" />
 
                     <!-- Main structure connectors -->
-                    <line x1="660" y1="240" x2="720" y2="240" stroke="#999" stroke-width="2"/>
-                    <line x1="880" y1="240" x2="940" y2="240" stroke="#999" stroke-width="2"/>
-                    <line x1="800" y1="160" x2="800" y2="120" stroke="#999" stroke-width="2"/>
-                    <line x1="800" y1="320" x2="800" y2="360" stroke="#999" stroke-width="2"/>
+                    <line x1="660" y1="240" x2="720" y2="240" stroke="#999" stroke-width="2" />
+                    <line x1="880" y1="240" x2="940" y2="240" stroke="#999" stroke-width="2" />
+                    <line x1="800" y1="160" x2="800" y2="120" stroke="#999" stroke-width="2" />
+                    <line x1="800" y1="320" x2="800" y2="360" stroke="#999" stroke-width="2" />
                 </g>
 
                 <!-- Floor -->
-                <rect x="0" y="660" width="1600" height="240" fill="url(#floorGrad)"/>
+                <rect x="0" y="660" width="1600" height="240" fill="url(#floorGrad)" />
 
                 <!-- Floor grid -->
                 <g stroke="#ddd" stroke-width="1" opacity="0.5">
-                    <line x1="0" y1="700" x2="1600" y2="700"/>
-                    <line x1="0" y1="740" x2="1600" y2="740"/>
-                    <line x1="0" y1="780" x2="1600" y2="780"/>
-                    <line x1="0" y1="820" x2="1600" y2="820"/>
-                    <line x1="200" y1="660" x2="200" y2="900"/>
-                    <line x1="400" y1="660" x2="400" y2="900"/>
-                    <line x1="600" y1="660" x2="600" y2="900"/>
-                    <line x1="800" y1="660" x2="800" y2="900"/>
-                    <line x1="1000" y1="660" x2="1000" y2="900"/>
-                    <line x1="1200" y1="660" x2="1200" y2="900"/>
-                    <line x1="1400" y1="660" x2="1400" y2="900"/>
+                    <line x1="0" y1="700" x2="1600" y2="700" />
+                    <line x1="0" y1="740" x2="1600" y2="740" />
+                    <line x1="0" y1="780" x2="1600" y2="780" />
+                    <line x1="0" y1="820" x2="1600" y2="820" />
+                    <line x1="200" y1="660" x2="200" y2="900" />
+                    <line x1="400" y1="660" x2="400" y2="900" />
+                    <line x1="600" y1="660" x2="600" y2="900" />
+                    <line x1="800" y1="660" x2="800" y2="900" />
+                    <line x1="1000" y1="660" x2="1000" y2="900" />
+                    <line x1="1200" y1="660" x2="1200" y2="900" />
+                    <line x1="1400" y1="660" x2="1400" y2="900" />
                 </g>
 
                 <!-- Work platform -->
-                <rect x="650" y="600" width="300" height="60" fill="#ddd" stroke="#999" stroke-width="2" rx="4"/>
-                <rect x="660" y="610" width="280" height="40" fill="#e8e8e8"/>
+                <rect x="650" y="600" width="300" height="60" fill="#ddd" stroke="#999" stroke-width="2" rx="4" />
+                <rect x="660" y="610" width="280" height="40" fill="#e8e8e8" />
                 <g stroke="#999" stroke-width="1">
-                    <line x1="680" y1="600" x2="680" y2="660"/>
-                    <line x1="710" y1="600" x2="710" y2="660"/>
-                    <line x1="740" y1="600" x2="740" y2="660"/>
-                    <line x1="770" y1="600" x2="770" y2="660"/>
-                    <line x1="800" y1="600" x2="800" y2="660"/>
-                    <line x1="830" y1="600" x2="830" y2="660"/>
-                    <line x1="860" y1="600" x2="860" y2="660"/>
-                    <line x1="890" y1="600" x2="890" y2="660"/>
-                    <line x1="920" y1="600" x2="920" y2="660"/>
+                    <line x1="680" y1="600" x2="680" y2="660" />
+                    <line x1="710" y1="600" x2="710" y2="660" />
+                    <line x1="740" y1="600" x2="740" y2="660" />
+                    <line x1="770" y1="600" x2="770" y2="660" />
+                    <line x1="800" y1="600" x2="800" y2="660" />
+                    <line x1="830" y1="600" x2="830" y2="660" />
+                    <line x1="860" y1="600" x2="860" y2="660" />
+                    <line x1="890" y1="600" x2="890" y2="660" />
+                    <line x1="920" y1="600" x2="920" y2="660" />
                 </g>
             </svg>
             <!-- Central satellite part -->
@@ -612,68 +701,105 @@
                         </defs>
 
                         <!-- Main solar panel array -->
-                        <rect x="20" y="30" width="360" height="240" fill="url(#panelGrad)" stroke="rgba(0,217,255,0.4)" stroke-width="2" rx="8"/>
+                        <rect x="20" y="30" width="360" height="240" fill="url(#panelGrad)" stroke="rgba(0,217,255,0.4)"
+                            stroke-width="2" rx="8" />
 
                         <!-- Metallic frame -->
-                        <rect x="20" y="30" width="360" height="20" fill="url(#metalGrad)" stroke="rgba(0,217,255,0.3)" stroke-width="1"/>
-                        <rect x="20" y="30" width="20" height="240" fill="url(#metalGrad)" stroke="rgba(0,217,255,0.2)" stroke-width="1"/>
+                        <rect x="20" y="30" width="360" height="20" fill="url(#metalGrad)" stroke="rgba(0,217,255,0.3)"
+                            stroke-width="1" />
+                        <rect x="20" y="30" width="20" height="240" fill="url(#metalGrad)" stroke="rgba(0,217,255,0.2)"
+                            stroke-width="1" />
 
                         <!-- Solar cells grid - realistic cells -->
                         <g id="solar-cells">
                             <!-- Row 1 -->
-                            <rect x="45" y="60" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
-                            <rect x="85" y="60" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
-                            <rect x="125" y="60" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
-                            <rect x="165" y="60" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
-                            <rect x="205" y="60" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
-                            <rect x="245" y="60" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
-                            <rect x="285" y="60" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
-                            <rect x="325" y="60" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="45" y="60" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1"
+                                opacity="0.9" />
+                            <rect x="85" y="60" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1"
+                                opacity="0.9" />
+                            <rect x="125" y="60" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1"
+                                opacity="0.9" />
+                            <rect x="165" y="60" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1"
+                                opacity="0.9" />
+                            <rect x="205" y="60" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1"
+                                opacity="0.9" />
+                            <rect x="245" y="60" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1"
+                                opacity="0.9" />
+                            <rect x="285" y="60" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1"
+                                opacity="0.9" />
+                            <rect x="325" y="60" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1"
+                                opacity="0.9" />
 
                             <!-- Row 2 -->
-                            <rect x="45" y="100" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
-                            <rect x="85" y="100" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
-                            <rect x="125" y="100" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
-                            <rect x="165" y="100" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
-                            <rect x="205" y="100" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
-                            <rect x="245" y="100" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
-                            <rect x="285" y="100" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
-                            <rect x="325" y="100" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="45" y="100" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1"
+                                opacity="0.9" />
+                            <rect x="85" y="100" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1"
+                                opacity="0.9" />
+                            <rect x="125" y="100" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d"
+                                stroke-width="1" opacity="0.9" />
+                            <rect x="165" y="100" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d"
+                                stroke-width="1" opacity="0.9" />
+                            <rect x="205" y="100" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d"
+                                stroke-width="1" opacity="0.9" />
+                            <rect x="245" y="100" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d"
+                                stroke-width="1" opacity="0.9" />
+                            <rect x="285" y="100" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d"
+                                stroke-width="1" opacity="0.9" />
+                            <rect x="325" y="100" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d"
+                                stroke-width="1" opacity="0.9" />
 
                             <!-- Row 3 -->
-                            <rect x="45" y="140" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
-                            <rect x="85" y="140" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
-                            <rect x="125" y="140" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
-                            <rect x="165" y="140" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
-                            <rect x="205" y="140" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
-                            <rect x="245" y="140" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
-                            <rect x="285" y="140" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
-                            <rect x="325" y="140" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
+                            <rect x="45" y="140" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1"
+                                opacity="0.9" />
+                            <rect x="85" y="140" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1"
+                                opacity="0.9" />
+                            <rect x="125" y="140" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d"
+                                stroke-width="1" opacity="0.9" />
+                            <rect x="165" y="140" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d"
+                                stroke-width="1" opacity="0.9" />
+                            <rect x="205" y="140" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d"
+                                stroke-width="1" opacity="0.9" />
+                            <rect x="245" y="140" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d"
+                                stroke-width="1" opacity="0.9" />
+                            <rect x="285" y="140" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d"
+                                stroke-width="1" opacity="0.9" />
+                            <rect x="325" y="140" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d"
+                                stroke-width="1" opacity="0.9" />
 
                             <!-- Row 4 -->
-                            <rect x="45" y="180" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
-                            <rect x="85" y="180" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
-                            <rect x="125" y="180" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
-                            <rect x="165" y="180" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
-                            <rect x="205" y="180" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
-                            <rect x="245" y="180" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
-                            <rect x="285" y="180" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1" opacity="0.9"/>
-                            <rect x="325" y="180" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1" opacity="0.9"/>
+                            <rect x="45" y="180" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d" stroke-width="1"
+                                opacity="0.9" />
+                            <rect x="85" y="180" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d" stroke-width="1"
+                                opacity="0.9" />
+                            <rect x="125" y="180" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d"
+                                stroke-width="1" opacity="0.9" />
+                            <rect x="165" y="180" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d"
+                                stroke-width="1" opacity="0.9" />
+                            <rect x="205" y="180" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d"
+                                stroke-width="1" opacity="0.9" />
+                            <rect x="245" y="180" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d"
+                                stroke-width="1" opacity="0.9" />
+                            <rect x="285" y="180" width="32" height="32" fill="#1a6d9d" stroke="#0a4d7d"
+                                stroke-width="1" opacity="0.9" />
+                            <rect x="325" y="180" width="32" height="32" fill="#1a5d8d" stroke="#0a3d6d"
+                                stroke-width="1" opacity="0.9" />
                         </g>
 
                         <!-- Connectors and wiring detail -->
-                        <line x1="40" y1="40" x2="40" y2="265" stroke="rgba(0,217,255,0.2)" stroke-width="1.5" stroke-dasharray="4,4"/>
-                        <line x1="365" y1="40" x2="365" y2="265" stroke="rgba(0,217,255,0.2)" stroke-width="1.5" stroke-dasharray="4,4"/>
+                        <line x1="40" y1="40" x2="40" y2="265" stroke="rgba(0,217,255,0.2)" stroke-width="1.5"
+                            stroke-dasharray="4,4" />
+                        <line x1="365" y1="40" x2="365" y2="265" stroke="rgba(0,217,255,0.2)" stroke-width="1.5"
+                            stroke-dasharray="4,4" />
 
                         <!-- Corner connectors -->
-                        <circle cx="35" cy="35" r="3" fill="rgba(0,217,255,0.5)"/>
-                        <circle cx="365" cy="35" r="3" fill="rgba(0,217,255,0.5)"/>
-                        <circle cx="35" cy="265" r="3" fill="rgba(0,217,255,0.5)"/>
-                        <circle cx="365" cy="265" r="3" fill="rgba(0,217,255,0.5)"/>
+                        <circle cx="35" cy="35" r="3" fill="rgba(0,217,255,0.5)" />
+                        <circle cx="365" cy="35" r="3" fill="rgba(0,217,255,0.5)" />
+                        <circle cx="35" cy="265" r="3" fill="rgba(0,217,255,0.5)" />
+                        <circle cx="365" cy="265" r="3" fill="rgba(0,217,255,0.5)" />
 
                         <!-- Reflective highlights for depth -->
-                        <ellipse cx="150" cy="100" rx="80" ry="40" fill="rgba(255,255,255,0.08)" opacity="0.6"/>
-                        <ellipse cx="250" cy="180" rx="60" ry="30" fill="rgba(255,255,255,0.05)" opacity="0.4"/>
+                        <ellipse cx="150" cy="100" rx="80" ry="40" fill="rgba(255,255,255,0.08)" opacity="0.6" />
+                        <ellipse cx="250" cy="180" rx="60" ry="30" fill="rgba(255,255,255,0.05)" opacity="0.4" />
                     </svg>
                 </div>
             </div>
@@ -798,7 +924,7 @@
         function switchView(viewName) {
             const view = views[viewName];
             const currentButtons = document.querySelectorAll('.menu-button');
-            
+
             // Update active button
             currentButtons.forEach(btn => {
                 btn.classList.remove('active');
@@ -851,7 +977,7 @@
                     const isCritical = field.key === 'severity' && (value === 'CRITICAL' || value === 'REQUIRES ACTION');
                     const isRed = field.key === 'action' || (field.key === 'severity' && value === 'CRITICAL');
                     const color = isRed ? 'severity-critical' : 'data-value';
-                    
+
                     html += `<div class="data-row">
                         <span class="data-label">${field.label}:</span>
                         <span class="${color}">${value}</span>
@@ -867,4 +993,5 @@
         switchView('live');
     </script>
 </body>
+
 </html>
