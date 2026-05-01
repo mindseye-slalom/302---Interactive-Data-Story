@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { Bar } from 'vue-chartjs'
 import {
   Chart as ChartJS,
@@ -89,7 +89,7 @@ const chartOptions: ChartOptions<'bar'> = {
         font: {
           family: chartFontFamily,
           size: 13,
-          weight: '600'
+          weight: 600
         },
         padding: 16,
         usePointStyle: true,
@@ -130,15 +130,14 @@ const chartOptions: ChartOptions<'bar'> = {
       stacked: false,
       grid: {
         offset: true,
-        color: 'rgba(255, 255, 255, 0.1)',
-        drawBorder: false
+        color: 'rgba(255, 255, 255, 0.1)'
       },
       ticks: {
         color: 'rgba(255, 255, 255, 0.7)',
         font: {
           family: chartFontFamily,
           size: 15,
-          weight: '600'
+          weight: 600
         }
       }
     },
@@ -146,15 +145,14 @@ const chartOptions: ChartOptions<'bar'> = {
       stacked: false,
       beginAtZero: true,
       grid: {
-        color: 'rgba(255, 255, 255, 0.1)',
-        drawBorder: false
+        color: 'rgba(255, 255, 255, 0.1)'
       },
       ticks: {
         color: 'rgba(255, 255, 255, 0.7)',
         font: {
           family: chartFontFamily,
           size: 13,
-          weight: '600'
+          weight: 600
         }
       }
     }
