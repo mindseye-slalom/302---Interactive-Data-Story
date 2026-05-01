@@ -54,26 +54,54 @@
       <div class="culprit-grid">
         <div class="culprit-item">
           <h4>Staffing</h4>
-          <p>Day: {{ inspectorStats.staffing.day.inspectors }} inspectors / {{ inspectorStats.staffing.day.lines }} lines</p>
-          <p>Night: {{ inspectorStats.staffing.night.inspectors }} inspectors / {{ inspectorStats.staffing.night.lines }} lines</p>
+          <div class="compare-row">
+            <span class="compare-label">Day</span>
+            <span class="compare-value">{{ inspectorStats.staffing.day.inspectors }} inspectors / {{ inspectorStats.staffing.day.lines }} lines</span>
+          </div>
+          <div class="compare-row">
+            <span class="compare-label">Night</span>
+            <span class="compare-value">{{ inspectorStats.staffing.night.inspectors }} inspectors / {{ inspectorStats.staffing.night.lines }} lines</span>
+          </div>
+          <p class="impact-chip">Impact: {{ staffingImpact }}</p>
         </div>
 
         <div class="culprit-item">
           <h4>Experience</h4>
-          <p>Day avg: {{ inspectorStats.experience.dayYears }} years</p>
-          <p>Night avg: {{ inspectorStats.experience.nightYears }} years</p>
+          <div class="compare-row">
+            <span class="compare-label">Day</span>
+            <span class="compare-value">{{ inspectorStats.experience.dayYears }} years avg</span>
+          </div>
+          <div class="compare-row">
+            <span class="compare-label">Night</span>
+            <span class="compare-value">{{ inspectorStats.experience.nightYears }} years avg</span>
+          </div>
+          <p class="impact-chip">Impact: {{ experienceImpact }}</p>
         </div>
 
         <div class="culprit-item">
           <h4>Lighting</h4>
-          <p>Day: {{ inspectorStats.environment.dayLux }} lux</p>
-          <p>Night: {{ inspectorStats.environment.nightLux }} lux</p>
+          <div class="compare-row">
+            <span class="compare-label">Day</span>
+            <span class="compare-value">{{ inspectorStats.environment.dayLux }} lux</span>
+          </div>
+          <div class="compare-row">
+            <span class="compare-label">Night</span>
+            <span class="compare-value">{{ inspectorStats.environment.nightLux }} lux</span>
+          </div>
+          <p class="impact-chip">Impact: {{ lightingImpact }}</p>
         </div>
 
         <div class="culprit-item process-item">
           <h4>Process</h4>
-          <p>Day: {{ inspectorStats.process.day }}</p>
-          <p>Night: {{ inspectorStats.process.night }}</p>
+          <div class="compare-row">
+            <span class="compare-label">Day</span>
+            <span class="compare-value">{{ inspectorStats.process.day }}</span>
+          </div>
+          <div class="compare-row">
+            <span class="compare-label">Night</span>
+            <span class="compare-value">{{ inspectorStats.process.night }}</span>
+          </div>
+          <p class="impact-chip">Impact: Night shift has fewer defect-catching checkpoints on critical components.</p>
         </div>
       </div>
 
@@ -134,6 +162,17 @@ const props = defineProps<{
   heatmap: HeatmapData
   inspectorStats: InspectorStatsData
 }>()
+
+const staffingDayCoverage = props.inspectorStats.staffing.day.inspectors / props.inspectorStats.staffing.day.lines
+const staffingNightCoverage = props.inspectorStats.staffing.night.inspectors / props.inspectorStats.staffing.night.lines
+const staffingDrop = Math.round((1 - (staffingNightCoverage / staffingDayCoverage)) * 100)
+
+const experienceDrop = Math.round((1 - (props.inspectorStats.experience.nightYears / props.inspectorStats.experience.dayYears)) * 100)
+const lightingDrop = Math.round((1 - (props.inspectorStats.environment.nightLux / props.inspectorStats.environment.dayLux)) * 100)
+
+const staffingImpact = `${staffingDrop}% lower inspector coverage per line at night`
+const experienceImpact = `${experienceDrop}% lower average inspection tenure at night`
+const lightingImpact = `${lightingDrop}% lower inspection lighting at night`
 
 const maxTypeRate = Math.max(...props.defectTypes.categories.flatMap((item) => [item.dayRate, item.swingRate, item.nightRate]))
 const maxHeatValue = Math.max(...props.heatmap.days.flatMap((day) => day.values))

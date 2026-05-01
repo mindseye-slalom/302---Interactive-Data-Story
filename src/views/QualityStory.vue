@@ -123,8 +123,15 @@ let counterObserver: IntersectionObserver | null = null
 let lazyObserver: IntersectionObserver | null = null
 
 onMounted(() => {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
   // Use Intersection Observer to animate counter only when Act 1 scrolls into view.
   if (counterRef.value) {
+    if (prefersReducedMotion) {
+      counterRef.value.textContent = '2,847'
+      counterAnimated = true
+    }
+
     counterObserver = new IntersectionObserver(
       (entries) => {
         const entry = entries[0]
@@ -147,7 +154,9 @@ onMounted(() => {
       { threshold: 0.5 }
     )
 
-    counterObserver.observe(counterRef.value)
+    if (!prefersReducedMotion) {
+      counterObserver.observe(counterRef.value)
+    }
   }
 
   if (!('IntersectionObserver' in window)) {
