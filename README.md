@@ -1,162 +1,95 @@
-# Satellite Quality Story - Interactive Data Narrative
+# Satellite Quality Story
 
-> An interactive data story revealing how shift timing dramatically impacts defect rates in satellite component manufacturing.
+Interactive five-act data story about quality variance in satellite manufacturing, built with Vue 3 + TypeScript.
 
-## 🎯 Project Overview
+## Overview
 
-This is "Seeing in the Dark" - an interactive narrative that uncovers a 3.2x higher defect rate on night shift production and explores actionable solutions grounded in data.
+The story walks through a single thread:
 
-**Tech Stack:**
-- Vue 3 with Composition API
+1. The scale of the defect problem.
+2. The shift-based variance surprise.
+3. Root causes behind the variance.
+4. Business and customer impact.
+5. Practical interventions and ROI.
+
+Current UI direction is Apple-inspired with a solid black page background and light content cards.
+
+## Current Stack
+
+- Vue 3 (Composition API + script setup)
 - TypeScript
-- Vite (build tool)
-- Chart.js (visualizations)
-- GSAP (animations)
-- Vuetify 3 (UI components)
+- Vite 5
+- Chart.js 4 + vue-chartjs 5
+- GSAP (counter animation)
 
-## 🚀 Quick Start
+## Scripts
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
-
-# Build for production
 npm run build
+npm run preview
 ```
 
-## 📁 Project Structure
+## Current Project Structure
 
-```
+```text
 src/
-├── components/          # Vue components
-│   ├── ScrollProgress.vue
-│   ├── AnimatedCounter.vue
-│   ├── RevealChart.vue
-│   ├── HeatMap.vue
-│   ├── ROICalculator.vue
-│   └── ...
-├── views/               # Page-level components
-│   └── QualityStory.vue
-├── composables/         # Reusable logic
-│   ├── useScrollAnimation.ts
-│   └── useChartAnimation.ts
-├── data/                # Mock data files (JSON)
-│   ├── qualityOverview.json
-│   ├── defectsByShift.json
-│   └── ...
-├── App.vue
-├── main.ts
-└── style.css
+	App.vue
+	main.ts
+	style.css
+	views/
+		QualityStory.vue
+	components/
+		ScrollProgress.vue
+		BarChart.vue
+		ActThreePattern.vue
+		ActFourImpact.vue
+		ActFiveSolution.vue
+	data/
+		qualityOverview.json
+		defectsByShift.json
+		defectsTypes.json
+		defectHeatmap.json
+		inspectorStats.json
+		costBreakdown.json
+		correlations.json
+		bestPractices.json
+		pilotResults.json
+		roicalculator.json
 
 docs/
-├── BRIEF.md             # Full project specification
-├── design-decisions.md  # Design rationale
-└── data-dictionary.md   # Data definitions
+	BRIEF.md
 
-.claude/
-├── context.md           # Project context for AI
-└── memory-bank.md       # Key decisions and learnings
+public/
+	vision-pro-inspector.png
 ```
 
-## 📖 The 5-Act Story
+## Implementation Notes
 
-1. **Act 1: The Problem** — Establish stakes ($4.2M cost)
-2. **Act 2: The Surprise** — Reveal shift-based variance
-3. **Act 3: The Pattern** — Deep dive into root causes
-4. **Act 4: The Impact** — Show full cost and consequences
-5. **Act 5: The Solution** — Pilot results and ROI calculator
+- All app styling is centralized in src/style.css and grouped by section comments.
+- Acts 2-5 are lazy loaded in src/views/QualityStory.vue using defineAsyncComponent and IntersectionObserver.
+- The Act 1 hero counter animates when it enters the viewport.
+- Act 2 chart readability was tuned with wrapped labels, spacing, and dark chart text.
+- Accessibility includes skip link, ARIA labels, keyboard focus styles, and reduced-motion handling.
 
-## 🎨 Design System
+## Testing and Validation
 
-**Colors:**
-- **Deep Blue** (#0D1B2A) — Main background
-- **Bright Cyan** (#00D9FF) — Highlights & tech accents
-- **Day Green** (#06D6A0) — Good quality
-- **Night Red** (#E63946) — Critical issues
-- **Purple** (#7209B7) — Future vision
+Primary validation step:
 
-**Typography:**
-- Orbitron Bold — Story titles
-- Roboto Condensed — Headings
-- Roboto — Body text
-- Roboto Mono — Data & metrics
-
-## 🛠️ Development
-
-**Key Components:**
-- `ScrollProgress` — Fixed progress bar
-- `AnimatedCounter` — Numbers counting up on scroll
-- `RevealChart` — Charts that animate on viewport entry
-- `HeatMap` — Custom heat map component
-- `ROICalculator` — Interactive slider-based calculator
-- `FutureVision` — AR visualization component
-
-**Animations:**
-- Scroll-triggered reveals using GSAP ScrollTrigger
-- Chart animations on data update
-- Counter animations on load
-- Smooth transitions between states
-
-## ♿ Accessibility
-
-- WCAG 2.1 AA compliant
-- Keyboard navigation throughout
-- Screen reader support with ARIA labels
-- Respects `prefers-reduced-motion`
-- Color-blind friendly palettes
-- Touch targets: 44px minimum
-
-## 📊 Data Files
-
-All data files are in `/src/data/`:
-- `qualityOverview.json` — Overall metrics
-- `defectsByShift.json` — Shift-based defect rates
-- `defectTypes.json` — Defect category breakdown
-- `defectHeatmap.json` — Hour-by-hour, day-by-day patterns
-- `inspectorStats.json` — Staffing and experience data
-- `costBreakdown.json` — Cost impact analysis
-- `correlations.json` — Statistical relationships
-- `pilotResults.json` — Before/after intervention data
-- `roiCalculator.json` — ROI scenarios
-
-## 🧪 Testing
-
-Run the narrative flow test:
-1. First-time viewer can follow story without confusion ✓
-2. Each act builds on the previous one ✓
-3. Insights are clearly stated, not buried ✓
-4. Data feels realistic for aerospace manufacturing ✓
-5. Interactive elements respond immediately ✓
-6. Responsive design works on mobile/tablet ✓
-
-## 🚢 Deployment
-
-Deploy to Vercel with:
 ```bash
 npm run build
-# Deploy dist/ folder to Vercel
 ```
 
-**Password Protection:**
-Add to `vercel.json` for password-protected preview
+Recent updates were validated with a successful production build.
 
-## 📚 References
+## Deployment
 
-- Edward Tufte — Data visualization principles
-- Stephen Few — Effective data displays
-- Aerospace quality standards (AMS/AS)
-- Manufacturing best practices
-- Apple Vision Pro engagement context
+- Build output is generated in dist/.
+- Vercel config is available in vercel.json.
 
-## 📝 License
+## License
 
-Licensed under MIT. See LICENSE file.
+MIT. See LICENSE.
 
----
-
-**Last Updated:** April 30, 2026  
-**Version:** 1.0.0  
-**Author:** [Your Name]
+Last updated: May 1, 2026
