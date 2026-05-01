@@ -85,20 +85,34 @@ import pilotResultsData from '../data/pilotResults.json'
 import roiCalculatorConfig from '../data/roicalculator.json'
 
 const counterRef = ref<HTMLElement | null>(null)
+let counterAnimated = false
 
 onMounted(() => {
-  // Animate counter in Act 1
+  // Use Intersection Observer to animate counter only when Act 1 scrolls into view
   if (counterRef.value) {
-    gsap.to({ value: 0 }, {
-      value: 2847,
-      duration: 2,
-      ease: 'power2.out',
-      onUpdate: function() {
-        if (counterRef.value) {
-          counterRef.value.textContent = Math.round(this.targets()[0].value).toLocaleString()
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        // Trigger animation when element is 50% visible
+        if (entry.isIntersecting && !counterAnimated) {
+          counterAnimated = true
+          gsap.to({ value: 0 }, {
+            value: 2847,
+            duration: 2,
+            ease: 'power2.out',
+            onUpdate: function() {
+              if (counterRef.value) {
+                counterRef.value.textContent = Math.round(this.targets()[0].value).toLocaleString()
+              }
+            }
+          })
+          observer.unobserve(counterRef.value!)
         }
-      }
-    })
+      },
+      { threshold: 0.5 }
+    )
+    
+    observer.observe(counterRef.value)
   }
 })
 </script>
