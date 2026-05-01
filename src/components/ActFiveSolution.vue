@@ -61,16 +61,15 @@
       <p class="card-subtitle">What if every inspector had superhuman vision?</p>
 
       <div class="ar-concept">
-        <iframe 
-          src="/ar-vision-mockup.html" 
+        <img
+          src="/vision-pro-inspector.png"
           class="ar-visual"
-          title="Vision Pro AR Inspector Experience"
-          allow="fullscreen"
-        ></iframe>
+          alt="Vision Pro inspector reviewing a payload module with augmented overlays showing pass and fail annotations, inspection results, part information, relevant specifications, and tool environment data."
+        />
 
         <p class="ar-description">
-          This Vision Pro AR experience demonstrates how augmented reality could transform quality inspection. Real-time defect flagging, AI-powered guidance, 
-          and historical pattern matching would level the playing field between shifts and make expertise scalable across all teams.
+          This concept image shows how augmented reality could transform quality inspection with in-context annotations, AI-assisted pass-fail guidance,
+          and live reference data that helps inspectors resolve issues faster and more consistently.
         </p>
       </div>
     </article>
@@ -396,6 +395,9 @@ const formatValue = (input: CalculatorInput, value: any): string => {
   box-shadow: 0 22px 44px rgba(0, 0, 0, 0.28);
   overflow: hidden;
   display: block;
+  object-fit: cover;
+  object-position: center;
+  background: rgba(12, 13, 16, 0.96);
 }
 
 .ar-scan-overlay {
