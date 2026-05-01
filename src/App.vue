@@ -22,7 +22,7 @@ import QualityStory from './views/QualityStory.vue'
 .app {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+  background: #000;
 }
 
 .story-container {

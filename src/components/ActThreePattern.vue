@@ -143,7 +143,7 @@ const scale = (value: number): number => (value / maxTypeRate) * 100
 const heatStyle = (value: number): Record<string, string> => {
   const intensity = value / maxHeatValue
   return {
-    backgroundColor: `rgba(230, 57, 70, ${0.2 + intensity * 0.75})`,
+    backgroundColor: `rgba(255, 69, 58, ${0.2 + intensity * 0.75})`,
     borderColor: `rgba(255, 255, 255, ${0.08 + intensity * 0.2})`
   }
 }
@@ -212,15 +212,15 @@ const heatStyle = (value: number): Record<string, string> => {
 }
 
 .mini-bar.day {
-  background: linear-gradient(90deg, rgba(6, 214, 160, 0.85), rgba(6, 214, 160, 0.65));
+  background: linear-gradient(90deg, rgba(48, 209, 88, 0.9), rgba(48, 209, 88, 0.68));
 }
 
 .mini-bar.swing {
-  background: linear-gradient(90deg, rgba(255, 183, 3, 0.85), rgba(255, 183, 3, 0.65));
+  background: linear-gradient(90deg, rgba(255, 214, 10, 0.9), rgba(255, 214, 10, 0.68));
 }
 
 .mini-bar.night {
-  background: linear-gradient(90deg, rgba(230, 57, 70, 0.95), rgba(230, 57, 70, 0.75));
+  background: linear-gradient(90deg, rgba(255, 69, 58, 0.95), rgba(255, 69, 58, 0.75));
 }
 
 .heatmap {

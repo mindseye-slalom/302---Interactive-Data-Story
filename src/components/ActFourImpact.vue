@@ -178,7 +178,7 @@ defineProps<{
 
 .bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, rgba(255, 71, 87, 0.95), rgba(255, 183, 3, 0.9));
+  background: linear-gradient(90deg, rgba(255, 69, 58, 0.95), rgba(255, 214, 10, 0.9));
 }
 
 .correlation-grid {

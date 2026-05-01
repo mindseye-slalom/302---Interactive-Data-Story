@@ -47,6 +47,6 @@ onUnmounted(() => {
   transition: transform 100ms linear;
   transform-origin: left;
   z-index: 1000;
-  box-shadow: 0 0 20px rgba(216, 163, 74, 0.45);
+  box-shadow: 0 0 20px rgba(10, 132, 255, 0.55);
 }
 </style>

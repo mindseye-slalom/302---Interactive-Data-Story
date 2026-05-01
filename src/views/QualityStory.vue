@@ -200,6 +200,7 @@ onUnmounted(() => {
 <style scoped>
 .quality-story {
   width: 100%;
+  background: #000;
 }
 
 .story-act {
@@ -210,12 +211,8 @@ onUnmounted(() => {
   padding: var(--spacing-2xl) var(--spacing-xl);
   scroll-margin-top: 60px;
   position: relative;
-  background: linear-gradient(180deg, rgba(20, 23, 29, 0.9), rgba(9, 10, 13, 0.98));
-  border-top: 1px solid rgba(216, 163, 74, 0.08);
-}
-
-.story-act:nth-child(2n) {
-  background: linear-gradient(180deg, rgba(15, 17, 21, 0.96), rgba(8, 9, 12, 1));
+  background: #000;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .act-content {
@@ -224,11 +221,16 @@ onUnmounted(() => {
 }
 
 .act-1 {
-  background:
-    radial-gradient(circle at top center, rgba(216, 163, 74, 0.18), transparent 34%),
-    linear-gradient(180deg, #17191e 0%, #0f1115 45%, #090a0d 100%);
+  background: #000;
   min-height: 100vh;
   align-items: center;
+}
+
+.act-1 h1 {
+  font-size: clamp(3.25rem, 7vw, 5rem);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-metrics {
@@ -239,22 +241,23 @@ onUnmounted(() => {
 }
 
 .metric-card {
-  background: linear-gradient(180deg, rgba(22, 25, 31, 0.96), rgba(14, 16, 20, 0.98));
-  border: 1px solid rgba(216, 163, 74, 0.18);
+  background: rgba(28, 28, 30, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
   padding: var(--spacing-lg);
   text-align: center;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(14px);
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
 .metric-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 34px rgba(216, 163, 74, 0.16);
+  box-shadow: 0 18px 34px rgba(10, 132, 255, 0.18);
 }
 
 .metric-value {
-  font-size: 2.5rem;
+  font-size: clamp(3.4rem, 7.5vw, 5.6rem);
   font-weight: 700;
   color: var(--color-cyan);
   margin-bottom: var(--spacing-md);
@@ -294,8 +297,8 @@ onUnmounted(() => {
 }
 
 .chart-container {
-  background: linear-gradient(180deg, rgba(20, 23, 29, 0.96), rgba(11, 12, 15, 0.98));
-  border: 1px solid rgba(216, 163, 74, 0.18);
+  background: rgba(28, 28, 30, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
   padding: var(--spacing-3xl);
   margin: var(--spacing-2xl) 0;
@@ -305,6 +308,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(14px);
 }
 
 .placeholder {

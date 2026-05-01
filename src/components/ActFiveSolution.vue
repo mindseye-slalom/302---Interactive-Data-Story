@@ -360,7 +360,7 @@ const formatValue = (input: CalculatorInput, value: any): string => {
 
 .bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, rgba(216, 163, 74, 0.92), rgba(244, 201, 128, 0.92));
+  background: linear-gradient(90deg, rgba(10, 132, 255, 0.92), rgba(100, 210, 255, 0.88));
 }
 
 .impact {
@@ -376,8 +376,8 @@ const formatValue = (input: CalculatorInput, value: any): string => {
 }
 
 .ar-vision {
-  background: linear-gradient(135deg, rgba(216, 163, 74, 0.12), rgba(216, 163, 74, 0.03));
-  border: 1px solid rgba(216, 163, 74, 0.22);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .ar-concept {
@@ -391,7 +391,7 @@ const formatValue = (input: CalculatorInput, value: any): string => {
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 12px;
-  border: 1px solid rgba(216, 163, 74, 0.24);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: 0 22px 44px rgba(0, 0, 0, 0.28);
   overflow: hidden;
   display: block;
@@ -420,7 +420,7 @@ const formatValue = (input: CalculatorInput, value: any): string => {
   position: absolute;
   width: 60px;
   height: 60px;
-  border: 2px solid rgba(216, 163, 74, 0.6);
+  border: 2px solid rgba(10, 132, 255, 0.8);
   border-radius: 4px;
   top: 20%;
   left: 10%;
@@ -439,8 +439,8 @@ const formatValue = (input: CalculatorInput, value: any): string => {
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(216, 163, 74, 0.7); }
-  50% { box-shadow: 0 0 0 8px rgba(216, 163, 74, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(10, 132, 255, 0.7); }
+  50% { box-shadow: 0 0 0 8px rgba(10, 132, 255, 0); }
 }
 
 .ar-text {
@@ -523,8 +523,8 @@ const formatValue = (input: CalculatorInput, value: any): string => {
 }
 
 .result-item.highlight {
-  border-color: rgba(216, 163, 74, 0.2);
-  background: rgba(216, 163, 74, 0.06);
+  border-color: rgba(10, 132, 255, 0.35);
+  background: rgba(10, 132, 255, 0.12);
 }
 
 .result-label {
