@@ -47,8 +47,19 @@ interface ChartProps {
 const props = defineProps<ChartProps>()
 const chartFontFamily = "'Segoe UI', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif"
 
+const wrappedLabels = computed(() =>
+  props.data.map((d) => {
+    const words = d.product.split(' ')
+    if (words.length <= 2) {
+      return words
+    }
+    const midpoint = Math.ceil(words.length / 2)
+    return [words.slice(0, midpoint).join(' '), words.slice(midpoint).join(' ')]
+  })
+)
+
 const chartData = computed(() => ({
-  labels: props.data.map(d => d.product),
+  labels: wrappedLabels.value,
   datasets: [
     {
       label: 'Expected Defects',
@@ -56,7 +67,8 @@ const chartData = computed(() => ({
       backgroundColor: 'rgba(10, 132, 255, 0.62)',
       borderColor: 'rgba(100, 210, 255, 0.95)',
       borderWidth: 2,
-      borderRadius: 6
+      borderRadius: 6,
+      maxBarThickness: 44
     },
     {
       label: 'Actual Defects',
@@ -64,7 +76,8 @@ const chartData = computed(() => ({
       backgroundColor: 'rgba(255, 69, 58, 0.72)',
       borderColor: 'rgba(255, 69, 58, 1)',
       borderWidth: 2,
-      borderRadius: 6
+      borderRadius: 6,
+      maxBarThickness: 44
     }
   ]
 }))
@@ -77,7 +90,9 @@ const chartOptions: ChartOptions<'bar'> = {
   },
   layout: {
     padding: {
-      right: 0
+      left: 8,
+      right: 8,
+      bottom: 12
     }
   },
   plugins: {
@@ -85,22 +100,22 @@ const chartOptions: ChartOptions<'bar'> = {
       display: true,
       position: 'top',
       labels: {
-        color: 'rgba(255, 255, 255, 0.9)',
+        color: 'rgba(28, 28, 30, 0.92)',
         font: {
           family: chartFontFamily,
-          size: 13,
+          size: 14,
           weight: 600
         },
-        padding: 16,
+        padding: 18,
         usePointStyle: true,
         pointStyle: 'circle'
       }
     },
     tooltip: {
-      backgroundColor: 'rgba(17, 19, 24, 0.98)',
-      titleColor: '#64D2FF',
-      bodyColor: 'rgba(255, 255, 255, 0.9)',
-      borderColor: '#0A84FF',
+      backgroundColor: 'rgba(255, 255, 255, 0.96)',
+      titleColor: '#1d1d1f',
+      bodyColor: 'rgba(29, 29, 31, 0.9)',
+      borderColor: 'rgba(10, 132, 255, 0.45)',
       borderWidth: 1,
       padding: 12,
       titleFont: {
@@ -113,6 +128,10 @@ const chartOptions: ChartOptions<'bar'> = {
         size: 12
       },
       callbacks: {
+        title: function(context) {
+          const label = context[0]?.label
+          return Array.isArray(label) ? label.join(' ') : String(label ?? '')
+        },
         afterLabel: function(context) {
           if (context.datasetIndex === 1) {
             const dataIndex = context.dataIndex
@@ -130,13 +149,17 @@ const chartOptions: ChartOptions<'bar'> = {
       stacked: false,
       grid: {
         offset: true,
-        color: 'rgba(255, 255, 255, 0.1)'
+        color: 'rgba(28, 28, 30, 0.14)'
       },
       ticks: {
-        color: 'rgba(255, 255, 255, 0.7)',
+        color: 'rgba(28, 28, 30, 0.82)',
+        autoSkip: false,
+        maxRotation: 0,
+        minRotation: 0,
+        padding: 8,
         font: {
           family: chartFontFamily,
-          size: 15,
+          size: 12,
           weight: 600
         }
       }
@@ -145,10 +168,11 @@ const chartOptions: ChartOptions<'bar'> = {
       stacked: false,
       beginAtZero: true,
       grid: {
-        color: 'rgba(255, 255, 255, 0.1)'
+        color: 'rgba(28, 28, 30, 0.14)'
       },
       ticks: {
-        color: 'rgba(255, 255, 255, 0.7)',
+        color: 'rgba(28, 28, 30, 0.82)',
+        callback: (value) => Number(value).toLocaleString(),
         font: {
           family: chartFontFamily,
           size: 13,
