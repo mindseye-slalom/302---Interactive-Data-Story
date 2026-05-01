@@ -161,29 +161,3 @@ const chartOptions: ChartOptions<'bar'> = {
   }
 }
 </script>
-
-<style scoped>
-.bar-chart-wrapper {
-  width: 100%;
-  height: 360px;
-  margin: 2rem 0;
-  padding: 1.5rem;
-  background: rgba(28, 28, 30, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
-  backdrop-filter: blur(14px);
-}
-
-/* Screen reader only content */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-</style>

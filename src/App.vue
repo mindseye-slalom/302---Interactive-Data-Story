@@ -17,17 +17,3 @@
 import ScrollProgress from './components/ScrollProgress.vue'
 import QualityStory from './views/QualityStory.vue'
 </script>
-
-<style scoped>
-.app {
-  width: 100%;
-  min-height: 100vh;
-  background: #000;
-}
-
-.story-container {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-</style>
